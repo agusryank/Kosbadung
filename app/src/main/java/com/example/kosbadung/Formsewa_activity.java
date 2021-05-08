@@ -1,0 +1,129 @@
+package com.example.kosbadung;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.example.kosbadung.session.SessionManager;
+
+import java.util.Calendar;
+import java.util.HashMap;
+
+public class Formsewa_activity extends AppCompatActivity {
+
+    private Spinner sp_lamakos;
+    private String[] list = {"1","2","3","4","5","6","7","8","9","10","11","12"};
+    String id,namakos,namapemilik,harga,namapenyewa,hasil;
+    Calendar cl;
+    DatePickerDialog dpl;
+    TextView txt_calendar,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,tv_bulan,tv_hasil;
+    ImageView img_calendar;
+    SessionManager sessionManager;
+    EditText edt_jumlahkamar;
+    Button btn_pesan;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_formsewa);
+        sp_lamakos = findViewById(R.id.sp_lamakos);
+        txt_id = findViewById(R.id.txt_id);
+        txt_namakos = findViewById(R.id.txt_namakos);
+        txt_namapemilik = findViewById(R.id.txt_namapemilik);
+        txt_harga = findViewById(R.id.txt_harga);
+        txt_calendar = findViewById(R.id.txt_calendar);
+        edt_jumlahkamar = findViewById(R.id.txt_jumlkamar);
+        img_calendar = findViewById(R.id.img_calendar);
+        txt_namapenyewa = findViewById(R.id.txt_namapenyewa);
+        btn_pesan = findViewById(R.id.btn_pesan);
+        tv_bulan = findViewById(R.id.tv_bulan);
+        tv_hasil = findViewById(R.id.tv_hasil);
+
+        sessionManager = new SessionManager(Formsewa_activity.this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+
+        namapenyewa = user.get(SessionManager.NAMA_USER);
+        txt_namapenyewa.setText(namapenyewa);
+
+        img_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cl = Calendar.getInstance();
+                int day = cl.get(Calendar.DAY_OF_MONTH);
+                int month = cl.get(Calendar.MONTH);
+                int year = cl.get(Calendar.YEAR);
+
+                dpl = new  DatePickerDialog(Formsewa_activity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        txt_calendar.setText(year + "-" + month + "-" + dayOfMonth);
+                    }
+                }, year,month,day);
+                dpl.show();
+            }
+        });
+
+        id = getIntent().getStringExtra("id");
+        txt_id.setText(id);
+
+        namakos = getIntent().getStringExtra("namakos");
+        txt_namakos.setText(namakos);
+
+        namapemilik = getIntent().getStringExtra("namapemilik");
+        txt_namapemilik.setText(namapemilik);
+
+        harga = getIntent().getStringExtra("harga");
+        txt_harga.setText(harga);
+
+        edt_jumlahkamar.getText().toString().trim();
+
+        ArrayAdapter adapter_lamakos = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, list);
+        adapter_lamakos.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        sp_lamakos.setAdapter(adapter_lamakos);
+
+        sp_lamakos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tv_bulan.setText(list[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        btn_pesan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int sharga = Integer.parseInt(txt_harga.getText().toString());
+                int sbulan = Integer.parseInt(tv_bulan.getText().toString());
+                int shasil = sharga*sbulan;
+                tv_hasil.setText(String.valueOf(shasil));
+                Intent pindahhalaman = new Intent(Formsewa_activity.this,checkout_activity.class);
+                pindahhalaman.putExtra("id",id);
+                pindahhalaman.putExtra("namakos",txt_namakos.getText().toString());
+                pindahhalaman.putExtra("namapemilik",namapemilik);
+                pindahhalaman.putExtra("namapenyewa",namapenyewa);
+                pindahhalaman.putExtra("jumlahkamar",edt_jumlahkamar.getText().toString());
+                pindahhalaman.putExtra("tgl_kos",txt_calendar.getText().toString());
+                pindahhalaman.putExtra("hargakos",tv_hasil.getText().toString());
+                pindahhalaman.putExtra("lamasewa",tv_bulan.getText().toString());
+                startActivity(pindahhalaman);
+
+            }
+        });
+    }
+
+}
