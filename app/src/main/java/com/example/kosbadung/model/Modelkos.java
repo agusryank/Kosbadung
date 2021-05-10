@@ -1,23 +1,23 @@
 package com.example.kosbadung.model;
 
 public class Modelkos {
-    String  id,Namakos,Namapemilik,Latitude,Longtitude,Jumlahkamar,foto1,foto2,foto3,Harga,Deskripsi,Kecamatan;
+    String  id,Namakos,Namapemilik,Latitude,Longtitude,foto1,foto2,foto3,foto4,Deskripsi,Kecamatan,Status;
 
     public Modelkos(){}
 
-    public Modelkos(String id, String namakos, String namapemilik, String latitude, String longtitude, String jumlahkamar, String foto1, String foto2, String foto3, String harga, String deskripsi, String kecamatan) {
+    public Modelkos(String id, String namakos, String namapemilik, String latitude, String longtitude, String foto1, String foto2, String foto3, String foto4, String deskripsi, String kecamatan, String status) {
         this.id = id;
-        this.Namakos = namakos;
-        this.Namapemilik = namapemilik;
-        this.Latitude = latitude;
-        this.Longtitude = longtitude;
-        this.Jumlahkamar = jumlahkamar;
+        Namakos = namakos;
+        Namapemilik = namapemilik;
+        Latitude = latitude;
+        Longtitude = longtitude;
         this.foto1 = foto1;
         this.foto2 = foto2;
         this.foto3 = foto3;
-        this.Harga = harga;
-        this.Deskripsi = deskripsi;
-        this.Kecamatan = kecamatan;
+        this.foto4 = foto4;
+        Deskripsi = deskripsi;
+        Kecamatan = kecamatan;
+        Status = status;
     }
 
     public String getId() {
@@ -60,14 +60,6 @@ public class Modelkos {
         Longtitude = longtitude;
     }
 
-    public String getJumlahkamar() {
-        return Jumlahkamar;
-    }
-
-    public void setJumlahkamar(String jumlahkamar) {
-        Jumlahkamar = jumlahkamar;
-    }
-
     public String getFoto1() {
         return foto1;
     }
@@ -92,12 +84,12 @@ public class Modelkos {
         this.foto3 = foto3;
     }
 
-    public String getHarga() {
-        return Harga;
+    public String getFoto4() {
+        return foto4;
     }
 
-    public void setHarga(String harga) {
-        Harga = harga;
+    public void setFoto4(String foto4) {
+        this.foto4 = foto4;
     }
 
     public String getDeskripsi() {
@@ -114,5 +106,13 @@ public class Modelkos {
 
     public void setKecamatan(String kecamatan) {
         Kecamatan = kecamatan;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

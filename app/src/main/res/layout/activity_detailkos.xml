@@ -133,35 +133,6 @@
                     android:textSize="20dp" />
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kamar tersedia : "
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/txt_jumlkamar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="kamar"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -249,31 +220,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="Harga Sewa /Bulan : "
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/txt_harga"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
@@ -286,8 +236,8 @@
 
                 <TextView
                     android:id="@+id/txt_deskripsi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/formwhite"
                     android:padding="10dp"
@@ -303,7 +253,7 @@
                 android:layout_marginBottom="30dp"
                 android:background="#1d75dd"
                 android:padding="10dp"
-                android:text="Ajukan Sewa"
+                android:text="Pilih Kamar"
                 android:textColor="#fff" />
 
         </LinearLayout>

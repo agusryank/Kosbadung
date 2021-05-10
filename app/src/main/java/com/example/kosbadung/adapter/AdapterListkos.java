@@ -43,9 +43,7 @@ public class AdapterListkos extends RecyclerView.Adapter<AdapterListkos.HolderDa
         String img= ServerAPI.URL_IMAGEKOS + mk.getFoto1();
         holder.id_kos.setText(mk.getId());
         holder.tv_namakos.setText(mk.getNamakos());
-        holder.tv_tersedia.setText(mk.getJumlahkamar());
         holder.tv_kecamatan.setText(mk.getKecamatan());
-        holder.tv_harga.setText(mk.getHarga());
         Glide.with(context).load(img).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.fotokos);
     }
 
@@ -60,14 +58,12 @@ public class AdapterListkos extends RecyclerView.Adapter<AdapterListkos.HolderDa
     class HolderData extends RecyclerView.ViewHolder {
 
         ImageView fotokos;
-        TextView tv_namakos, tv_kecamatan, tv_tersedia, tv_harga, id_kos;
+        TextView tv_namakos, tv_kecamatan, id_kos;
 
         public HolderData(final View view) {
             super(view);
             tv_namakos = view.findViewById(R.id.tv_namakos);
             tv_kecamatan = view.findViewById(R.id.tv_kecamatan);
-            tv_tersedia = view.findViewById(R.id.tv_tersedia);
-            tv_harga = view.findViewById(R.id.tv_harga);
             id_kos = view.findViewById(R.id.id_kos);
             fotokos = view.findViewById(R.id.fotokos);
 

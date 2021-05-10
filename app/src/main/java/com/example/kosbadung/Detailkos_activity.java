@@ -111,11 +111,11 @@ public class Detailkos_activity extends AppCompatActivity {
         btn_sewa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Detailkos_activity.this, Formsewa_activity.class);
+                        Intent intent = new Intent(Detailkos_activity.this, ListKamar.class);
                         intent.putExtra("id",txt_idkos.getText().toString());
-                        intent.putExtra("namakos",txt_namakos.getText().toString());
-                        intent.putExtra("namapemilik",txt_namapemilik.getText().toString());
-                        intent.putExtra("harga",txt_harga.getText().toString());
+//                        intent.putExtra("namakos",txt_namakos.getText().toString());
+//                        intent.putExtra("namapemilik",txt_namapemilik.getText().toString());
+//                        intent.putExtra("harga",txt_harga.getText().toString());
                         startActivity(intent);
 
             }
@@ -142,9 +142,7 @@ public class Detailkos_activity extends AppCompatActivity {
                             txt_namakos.setText(data.getString("Namakos"));
                             txt_namakec.setText(data.getString("Kecamatan"));
                             txt_namapemilik.setText(data.getString("Namapemilik"));
-                            txt_harga.setText(data.getString("Harga"));
                             txt_deskripsi.setText(data.getString("Deskripsi"));
-                            txt_jmlkamar.setText(data.getString("Jumlahkamar"));
                             latitude.setText(data.getString("Latitude"));
                             longtitude.setText(data.getString("Longtitude"));
 

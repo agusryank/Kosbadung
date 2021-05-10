@@ -3,10 +3,11 @@ package com.example.kosbadung.server;
 public class ServerAPI {
 
     //Url
-    public static final String URL = "192.168.118.1";
+    public static final String URL = "192.168.100.84";
 
     //Phpnative
     public static final String URL_read_listkos ="http://"+URL+"/kosbadung/androidAPI/read_listkos.php";
+    public static final String URL_read_listkamar ="http://"+URL+"/kosbadung/androidAPI/read_listkamar.php";
     public static final String URL_read_listcheckout ="http://"+URL+"/kosbadung/androidAPI/read_listcheckout.php";
     public static final String URL_read_listriwayat ="http://"+URL+"/kosbadung/androidAPI/read_listriwayat.php";
     public static  final String URL_login = "http://"+URL+"/kosbadung/androidAPI/login.php";
@@ -18,6 +19,7 @@ public class ServerAPI {
 
     // Image
     public static  final String URL_IMAGEKOS = "http://"+URL+"/kosbadung/androidAPI/Image/FotoKos/";
+    public static  final String URL_IMAGEKAMAR = "http://"+URL+"/kosbadung/androidAPI/Image/FotoKamarKos/";
     public static  final String URL_IMAGEBUKTI = "http://"+URL+"/kosbadung/androidAPI/Image/BuktiPembayaran/";
 
 }

@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FormBuktiPending_activity"></activity>
+        <activity android:name=".ListKamar"></activity>
+        <activity android:name=".listkos.ListActivity" />
+        <activity android:name=".FormBuktiPending_activity" />
         <activity android:name=".checkout_activity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

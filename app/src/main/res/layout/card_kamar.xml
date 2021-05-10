@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -32,7 +31,7 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/fotokos"
+                    android:id="@+id/fotokamar"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginTop="5dp"
@@ -53,13 +52,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_namakos"
+                        android:id="@+id/tv_namakamar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:gravity="center|left"
                         android:textSize="16dp"
-                        android:text="Nama Kos"
+                        android:text="Nama Kamar"
                         android:textStyle="bold"
                         android:textColor="#000000" />
 
@@ -74,11 +73,11 @@
                             android:layout_height="wrap_content"
                             android:paddingRight="5dp"
                             android:gravity="center|left"
-                            android:text="Kecamatan"
+                            android:text="Jumlah Kamar"
                             android:textColor="#000000" />
 
                         <TextView
-                            android:id="@+id/tv_kecamatan"
+                            android:id="@+id/tv_jmlkamar"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -89,12 +88,37 @@
                     </LinearLayout>
 
                     <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="5dp"
+                            android:gravity="center|left"
+                            android:text="Harga Kamar"
+                            android:textColor="#000000" />
 
                         <TextView
-                            android:id="@+id/id_kos"
+                            android:id="@+id/tv_hargakamar"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center|left"
+                            android:text="xxx"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:id="@+id/id_kamar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
