@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Form Sewa"
             android:textSize="30dp"
+
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"/>
@@ -31,12 +32,13 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Id Transaksi : "
-            android:textSize="20dp"
+            android:text="Id Kos : "
+            android:textSize="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"/>
         <TextView
@@ -44,19 +46,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:text="xxx"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/txt_idkos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="xxx"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/txt_idpemilik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="xxx"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/txt_idpenyewa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="xxx"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Kos : "
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"/>
         <TextView
@@ -65,18 +93,18 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Pemilik Kos : "
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"/>
         <TextView
@@ -85,18 +113,18 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nama Penyewa Kos : "
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"/>
                 <TextView
@@ -105,18 +133,38 @@
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="20dp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Kamar Kos : "
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"/>
+                <TextView
+                    android:id="@+id/txt_namakamar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jumlah kamar: "
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"/>
 
@@ -126,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Masukkan Jumlah kamar yang ingin disewa"
                     android:layout_marginTop="20dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginRight="5dp">
 
                 </EditText>
@@ -140,7 +188,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="Tgl Mulai kos : "
-             android:textSize="20dp"
+             android:textSize="15dp"
              android:layout_marginTop="20dp"
              android:layout_marginLeft="20dp"/>
           <ImageView
@@ -163,12 +211,12 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Harga Kos / Bulan : "
-            android:textSize="20dp"
+            android:text="Harga Kamar Kos /Bulan : "
+            android:textSize="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"/>
         <TextView
@@ -177,7 +225,7 @@
             android:id="@+id/txt_harga"
             android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
 
             <LinearLayout
@@ -188,7 +236,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lama Sewa Kos : "
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"/>
                 <Spinner
@@ -213,7 +261,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bulan "
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="5dp"/>
             </LinearLayout>

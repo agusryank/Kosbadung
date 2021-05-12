@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ListKamar"></activity>
+        <activity android:name=".Detailkamar_activity"></activity>
+        <activity android:name=".ListKamar" />
         <activity android:name=".listkos.ListActivity" />
         <activity android:name=".FormBuktiPending_activity" />
         <activity android:name=".checkout_activity" />

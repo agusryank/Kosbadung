@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Login Berhasil", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(getApplicationContext(),BerandaActivity.class);
                                 startActivity(intent);
-                            } else if (status_login.equals("Gagal Login")){
+                            } else if (status_login.equals("gagal")){
                                 Toast.makeText(LoginActivity.this, "Username Atau Password salah", Toast.LENGTH_SHORT).show();
                             }
 

@@ -3,7 +3,7 @@ package com.example.kosbadung.server;
 public class ServerAPI {
 
     //Url
-    public static final String URL = "192.168.100.84";
+    public static final String URL = "192.168.100.107";
 
     //Phpnative
     public static final String URL_read_listkos ="http://"+URL+"/kosbadung/androidAPI/read_listkos.php";
@@ -12,6 +12,7 @@ public class ServerAPI {
     public static final String URL_read_listriwayat ="http://"+URL+"/kosbadung/androidAPI/read_listriwayat.php";
     public static  final String URL_login = "http://"+URL+"/kosbadung/androidAPI/login.php";
     public static  final String URL_read_detailkos = "http://"+URL+"/kosbadung/androidAPI/detail_kos.php";
+    public static  final String URL_read_detailkamar = "http://"+URL+"/kosbadung/androidAPI/detail_kamar.php";
     public static  final String URL_transaksi_langsung = "http://"+URL+"/kosbadung/androidAPI/transaksi_langsung.php";
     public static  final String URL_bayar_pending = "http://"+URL+"/kosbadung/androidAPI/bayar_pending.php";
     public static  final String URL_transaksi_pending = "http://"+URL+"/kosbadung/androidAPI/transaksi_pending.php";

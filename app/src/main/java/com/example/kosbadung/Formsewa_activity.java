@@ -24,10 +24,10 @@ public class Formsewa_activity extends AppCompatActivity {
 
     private Spinner sp_lamakos;
     private String[] list = {"1","2","3","4","5","6","7","8","9","10","11","12"};
-    String id,namakos,namapemilik,harga,namapenyewa,hasil;
+    String id,namakamar,id_kos,namakos,id_pemilik,namapemilik,harga,id_penyewa,namapenyewa,hasil;
     Calendar cl;
     DatePickerDialog dpl;
-    TextView txt_calendar,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,tv_bulan,tv_hasil;
+    TextView txt_calendar,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,tv_bulan,tv_hasil,txt_namakamar,txt_idkos,txt_idpemilik,txt_idpenyewa;
     ImageView img_calendar;
     SessionManager sessionManager;
     EditText edt_jumlahkamar;
@@ -41,6 +41,7 @@ public class Formsewa_activity extends AppCompatActivity {
         txt_id = findViewById(R.id.txt_id);
         txt_namakos = findViewById(R.id.txt_namakos);
         txt_namapemilik = findViewById(R.id.txt_namapemilik);
+        txt_namakamar = findViewById(R.id.txt_namakamar);
         txt_harga = findViewById(R.id.txt_harga);
         txt_calendar = findViewById(R.id.txt_calendar);
         edt_jumlahkamar = findViewById(R.id.txt_jumlkamar);
@@ -49,9 +50,15 @@ public class Formsewa_activity extends AppCompatActivity {
         btn_pesan = findViewById(R.id.btn_pesan);
         tv_bulan = findViewById(R.id.tv_bulan);
         tv_hasil = findViewById(R.id.tv_hasil);
+        txt_idkos = findViewById(R.id.txt_idkos);
+        txt_idpemilik = findViewById(R.id.txt_idpemilik);
+        txt_idpenyewa = findViewById(R.id.txt_idpenyewa);
 
         sessionManager = new SessionManager(Formsewa_activity.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
+
+        id_penyewa = user.get(SessionManager.ID_USER);
+        txt_idpenyewa.setText(id_penyewa);
 
         namapenyewa = user.get(SessionManager.NAMA_USER);
         txt_namapenyewa.setText(namapenyewa);
@@ -74,16 +81,26 @@ public class Formsewa_activity extends AppCompatActivity {
             }
         });
 
+
         id = getIntent().getStringExtra("id");
         txt_id.setText(id);
 
-        namakos = getIntent().getStringExtra("namakos");
+        namakamar = getIntent().getStringExtra("nama_kamar");
+        txt_namakamar.setText(namakamar);
+
+        id_kos = getIntent().getStringExtra("id_kos");
+        txt_idkos.setText(id_kos);
+
+        namakos = getIntent().getStringExtra("nama_kos");
         txt_namakos.setText(namakos);
 
-        namapemilik = getIntent().getStringExtra("namapemilik");
+        id_pemilik = getIntent().getStringExtra("id_pemilik");
+        txt_idpemilik.setText(id_pemilik);
+
+        namapemilik = getIntent().getStringExtra("nama_pemilik");
         txt_namapemilik.setText(namapemilik);
 
-        harga = getIntent().getStringExtra("harga");
+        harga = getIntent().getStringExtra("hargakamar");
         txt_harga.setText(harga);
 
         edt_jumlahkamar.getText().toString().trim();
@@ -113,8 +130,12 @@ public class Formsewa_activity extends AppCompatActivity {
                 tv_hasil.setText(String.valueOf(shasil));
                 Intent pindahhalaman = new Intent(Formsewa_activity.this,checkout_activity.class);
                 pindahhalaman.putExtra("id",id);
+                pindahhalaman.putExtra("namakamar",namakamar);
+                pindahhalaman.putExtra("id_kos",id_kos);
                 pindahhalaman.putExtra("namakos",txt_namakos.getText().toString());
+                pindahhalaman.putExtra("id_pemilik",id_pemilik);
                 pindahhalaman.putExtra("namapemilik",namapemilik);
+                pindahhalaman.putExtra("id_penyewa",id_penyewa);
                 pindahhalaman.putExtra("namapenyewa",namapenyewa);
                 pindahhalaman.putExtra("jumlahkamar",edt_jumlahkamar.getText().toString());
                 pindahhalaman.putExtra("tgl_kos",txt_calendar.getText().toString());

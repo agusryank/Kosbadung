@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.kosbadung.Detailkamar_activity;
 import com.example.kosbadung.Detailkos_activity;
 import com.example.kosbadung.R;
 import com.example.kosbadung.model.Modelkamar;
@@ -74,9 +75,9 @@ public class AdapterListKamar extends RecyclerView.Adapter<AdapterListKamar.Hold
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(view.getContext(), Detailkos_activity.class);
-//                    intent.putExtra("id",id_kos.getText().toString());
-//                    view.getContext().startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), Detailkamar_activity.class);
+                    intent.putExtra("id",id_kamar.getText().toString());
+                    view.getContext().startActivity(intent);
                 }
             });
         }

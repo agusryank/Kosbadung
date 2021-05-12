@@ -17,7 +17,7 @@ public class SessionManager {
 
     private static final String PREF_NAME = "LOGIN";
     private static final String LOGIN = "IS_LOGIN";
-    private static final String ID_USER = "ID_USER";
+    public static final String ID_USER = "ID_USER";
     public static final String NAMA_USER = "NAMA_USER";
     public static final String ALAMAT = "AlAMAT_USER";
     public static final String NO_TELP = "NO_TELP";
