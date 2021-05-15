@@ -1,0 +1,146 @@
+package com.example.kosbadung;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import android.Manifest;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.example.kosbadung.Util.GetKost;
+import com.example.kosbadung.Util.GetLocation;
+import com.example.kosbadung.adapter.ResponseGetKost;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.Task;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
+
+    private static final String TAG = "MapsActivity";
+    private GoogleMap mMap;
+    public static final int PERMISSIONS_REQUEST = 1;
+    LatLng location_device;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps_kost);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        assert mapFragment != null;
+        mapFragment.getMapAsync(this);
+        permissionCheck();
+        getKostArround();
+    }
+    @Override
+    public void onMapReady(@NotNull GoogleMap googleMap) {
+        Log.d("HOME", "OnMapReady Triger");
+        mMap = googleMap;
+        mMap.setMaxZoomPreference(18);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
+        task.addOnSuccessListener(this, locationSettingsResponse -> {
+            new GetLocation(MapsKost.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
+        });
+        task.addOnFailureListener(this, e -> {
+            if (e instanceof ResolvableApiException) {
+                ResolvableApiException resolvable = (ResolvableApiException) e;
+                try {
+                    resolvable.startResolutionForResult(this, 51);
+                } catch (IntentSender.SendIntentException e1) {
+                    Log.d("HOME", "ERROR onMapReady");
+                    e1.printStackTrace();
+                }
+            }
+        });
+    }
+    private void getKostArround(){
+        int radius = 10;
+        new GetLocation(MapsKost.this, (latitude, longitude) -> new GetKost(latitude, longitude, radius, new GetKost.Listener() {
+            @Override
+            public void success(List<ResponseGetKost> response) {
+                int kosts = response.size();
+                Log.i(TAG, "success: "+kosts);
+                if(kosts > 0){
+                    Log.i(TAG, "success: "+response.get(0).getNamakos());
+                    for(int i=0;i<kosts;i++){
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()));
+                    }
+                    boundsLocation(location_device, new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())));
+                }else {
+                    Log.i(TAG, "success: tidak ada kost terdekat diradius "+radius+" km");
+                    Toast.makeText(MapsKost.this, "tidak ada kost terdekat diradius "+radius+" km", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void failed(String msg) {
+                Log.e(TAG, "failed: "+msg);
+            }
+        }));
+    }
+    private void boundsLocation(LatLng start, LatLng end){
+        new GetLocation(MapsKost.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
+        if(!(location_device == null)){
+            LatLngBounds latLngBounds = new LatLngBounds(start, end);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 12));
+        }else {
+            if(!isFinishing()){
+                Log.e(TAG, "boundsLocation: lokasi tidak ditemukan");
+            }
+        }
+    }
+    private void permissionCheck() {
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (lm != null) {
+            if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                Log.d("HOME", "Permission needed");
+            }
+            int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+            if (permission == PackageManager.PERMISSION_GRANTED) {
+                Log.d("HOME", "permission ok");
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST);
+            }
+            new GetLocation(MapsKost.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
+            FragmentManager myFM = getSupportFragmentManager();
+            final SupportMapFragment mapFragment = (SupportMapFragment) myFM.findFragmentById(R.id.map);
+            if (mapFragment != null) {
+                mapFragment.getMapAsync(MapsKost.this);
+            } else {
+                Log.d("HOME", "mapFragment null");
+            }
+        }
+    }
+}

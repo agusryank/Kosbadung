@@ -1,0 +1,17 @@
+package com.example.kosbadung.Network;
+import com.example.kosbadung.adapter.ResponseGetKost;
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+public interface ApiServices {
+    @FormUrlEncoded
+    @POST("getArroundKost")
+    Call<List<ResponseGetKost>> get_kost(
+            @Field("latitude") double latitude,
+            @Field("longitude") double longitude,
+            @Field("radius") int radius
+    );
+
+}

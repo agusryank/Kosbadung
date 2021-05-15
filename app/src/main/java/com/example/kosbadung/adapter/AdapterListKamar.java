@@ -48,7 +48,7 @@ public class AdapterListKamar extends RecyclerView.Adapter<AdapterListKamar.Hold
         holder.tv_namakamar.setText(mk.getNamakamar());
         holder.tv_jmlkamar.setText(mk.getJumlahkamar());
         holder.tv_hargakamar.setText(mk.getHargakamar());
-        Glide.with(context).load(img).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.fotokamar);
+        Glide.with(context).load(img).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.fotokamar);
     }
 
 

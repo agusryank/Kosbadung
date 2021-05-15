@@ -21,8 +21,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.kosbadung.MapsActivity;
+import com.example.kosbadung.MapsKost;
 import com.example.kosbadung.R;
+import com.example.kosbadung.Util.GetKost;
+import com.example.kosbadung.Util.GetLocation;
 import com.example.kosbadung.adapter.AdapterListkos;
+import com.example.kosbadung.adapter.ResponseGetKost;
 import com.example.kosbadung.listkos.ListActivity;
 import com.example.kosbadung.model.Modelkos;
 import com.example.kosbadung.server.AppController;
@@ -42,6 +46,7 @@ import java.util.Map;
  */
 public class HomeFragment extends Fragment {
 
+    private static final String TAG = "HomeFragment";
     private CardView btn_list, btn_peta;
 
 
@@ -68,7 +73,7 @@ public class HomeFragment extends Fragment {
         btn_peta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MapsActivity.class);
+                Intent intent = new Intent(getContext(), MapsKost.class);
                 startActivity(intent);
             }
         });
@@ -76,6 +81,4 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
-
 }

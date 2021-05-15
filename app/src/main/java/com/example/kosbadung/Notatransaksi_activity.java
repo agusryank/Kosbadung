@@ -42,7 +42,7 @@ public class Notatransaksi_activity extends AppCompatActivity {
         image = getIntent().getStringExtra("bukti");
 
         String img = ServerAPI.URL_IMAGEBUKTI + image;
-        Glide.with(Notatransaksi_activity.this).load(img).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(img_bukti);
+        Glide.with(Notatransaksi_activity.this).load(img).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(img_bukti);
 
     }
 }

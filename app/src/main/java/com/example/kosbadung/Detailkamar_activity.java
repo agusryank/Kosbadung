@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.kosbadung.server.AppController;
 import com.example.kosbadung.server.ServerAPI;
 
@@ -93,7 +94,7 @@ public class Detailkamar_activity extends AppCompatActivity {
                             tv_hargakamar.setText(data.getString("Hargakamar"));
 
 
-                            Glide.with(Detailkamar_activity.this).load(photos1).thumbnail(0.5f).crossFade().diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto1);
+                            Glide.with(Detailkamar_activity.this).load(photos1).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(foto1);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

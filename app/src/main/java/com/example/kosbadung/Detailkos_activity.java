@@ -146,10 +146,10 @@ public class Detailkos_activity extends AppCompatActivity {
                             latitude.setText(data.getString("Latitude"));
                             longtitude.setText(data.getString("Longtitude"));
 
-                            Glide.with(Detailkos_activity.this).load(photos1).thumbnail(0.5f).crossFade().diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto1);
-                            Glide.with(Detailkos_activity.this).load(photos2).thumbnail(0.5f).crossFade().diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto2);
-                            Glide.with(Detailkos_activity.this).load(photos3).thumbnail(0.5f).crossFade().diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto3);
-                            Glide.with(Detailkos_activity.this).load(photos4).thumbnail(0.5f).crossFade().diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto4);
+                            Glide.with(Detailkos_activity.this).load(photos1).thumbnail(0.5f).diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto1);
+                            Glide.with(Detailkos_activity.this).load(photos2).thumbnail(0.5f).diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto2);
+                            Glide.with(Detailkos_activity.this).load(photos3).thumbnail(0.5f).diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto3);
+                            Glide.with(Detailkos_activity.this).load(photos4).thumbnail(0.5f).diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL).into(foto4);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

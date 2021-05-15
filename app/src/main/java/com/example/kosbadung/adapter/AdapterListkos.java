@@ -44,7 +44,7 @@ public class AdapterListkos extends RecyclerView.Adapter<AdapterListkos.HolderDa
         holder.id_kos.setText(mk.getId());
         holder.tv_namakos.setText(mk.getNamakos());
         holder.tv_kecamatan.setText(mk.getKecamatan());
-        Glide.with(context).load(img).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.fotokos);
+        Glide.with(context).load(img).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.fotokos);
     }
 
 
