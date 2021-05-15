@@ -9,4 +9,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_kost">Map</string>
+    <string name="tampilkan">tampilkan</string>
+    <string name="menampilkan_kost_berdasarkan">Menampilkan Kost berdasarkan :</string>
 </resources>

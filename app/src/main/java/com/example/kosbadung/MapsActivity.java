@@ -34,9 +34,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static final String TAG = "MapsActivity";
     private GoogleMap mMap;
-//    String latitude, longtitude;
-    public static final int PERMISSIONS_REQUEST = 1;
+    String latitude, longtitude, kost_name;
     LatLng location_device;
+    public static final int PERMISSIONS_REQUEST = 1;
 
 
     @Override
@@ -46,9 +46,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
-//        latitude = getIntent().getStringExtra("latitude");
-//        longtitude = getIntent().getStringExtra("longtitude");
+        latitude = getIntent().getStringExtra("latitude");
+        longtitude = getIntent().getStringExtra("longtitude");
+        kost_name = getIntent().getStringExtra("kost_name");
+
         permissionCheck();
 
     }
@@ -56,57 +59,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(@NotNull GoogleMap googleMap) {
         Log.d("HOME", "OnMapReady Triger");
         mMap = googleMap;
-        if (mMap != null) {
-            mMap.setMaxZoomPreference(18);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            mMap.setMyLocationEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(false);
-            LocationRequest locationRequest = LocationRequest.create();
-            locationRequest.setInterval(1000);
-            locationRequest.setFastestInterval(5000);
-            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
-            SettingsClient settingsClient = LocationServices.getSettingsClient(this);
-            Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
-            task.addOnSuccessListener(this, locationSettingsResponse -> {
-                new GetLocation(MapsActivity.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
-                if (location_device != null) {
-                    boundsLocation(30);
-                } else {
-                    if(!isFinishing()){
-                        Log.e(TAG, "onMapReady: lokasi tidak diemukan");
-                    }
-                }
-            });
-            task.addOnFailureListener(this, e -> {
-                if (e instanceof ResolvableApiException) {
-                    ResolvableApiException resolvable = (ResolvableApiException) e;
-                    try {
-                        resolvable.startResolutionForResult(this, 51);
-                    } catch (IntentSender.SendIntentException e1) {
-                        Log.d("HOME", "ERROR onMapReady");
-                        e1.printStackTrace();
-                    }
-                }
-            });
+        mMap.setMaxZoomPreference(18);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
-//        mMap = googleMap;
-//
-//        // Add a marker in Sydney and move the camera
-////        LatLng sydney = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longtitude));
-////        mMap.addMarker(new MarkerOptions().position(sydney).title("Lokasi Kost"));
-////        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        LatLng bali = new LatLng(-8.8007748,115.1749558);
-//        mMap.addMarker(new MarkerOptions().position(bali).title("Lokasi Kost"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(bali));
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
+        task.addOnSuccessListener(this, locationSettingsResponse -> {
+            new GetLocation(MapsActivity.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
+            LatLng kost_location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longtitude));
+            mMap.addMarker(new MarkerOptions().position(kost_location).title(kost_name));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(kost_location));
+            boundsLocation(kost_location);
+        });
+        task.addOnFailureListener(this, e -> {
+            if (e instanceof ResolvableApiException) {
+                ResolvableApiException resolvable = (ResolvableApiException) e;
+                try {
+                    resolvable.startResolutionForResult(this, 51);
+                } catch (IntentSender.SendIntentException e1) {
+                    Log.d("HOME", "ERROR onMapReady");
+                    e1.printStackTrace();
+                }
+            }
+        });
+
     }
-    private void boundsLocation(int zoom){
-        new GetLocation(MapsActivity.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
+    private void boundsLocation(LatLng latlng){
         if(!(location_device == null)){
-            LatLngBounds latLngBounds = new LatLngBounds(location_device, location_device);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, zoom));
+            LatLngBounds latLngBounds = new LatLngBounds(latlng, latlng);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 25));
         }else {
             if(!isFinishing()){
                 Log.e(TAG, "boundsLocation: lokasi tidak ditemukan");
@@ -126,7 +115,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST);
             }
             new GetLocation(MapsActivity.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
-
             FragmentManager myFM = getSupportFragmentManager();
             final SupportMapFragment mapFragment = (SupportMapFragment) myFM.findFragmentById(R.id.map);
             if (mapFragment != null) {
