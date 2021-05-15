@@ -1,11 +1,13 @@
 package com.example.kosbadung;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
@@ -34,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 
@@ -108,7 +111,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
                 if(kosts > 0){
                     Log.i(TAG, "success: "+response.get(0).getNamakos());
                     for(int i=0;i<kosts;i++){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()));
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()).snippet(response.get(i).getId()));
                     }
                     boundsLocation(new LatLng(Double.parseDouble(response.get(0).getLatitude()), Double.parseDouble(response.get(0).getLongtitude())),
                             new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())));
@@ -128,6 +131,11 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
         Log.d("HOME", "OnMapReady Triger");
         mMap = googleMap;
         mMap.setMaxZoomPreference(18);
+        mMap.setOnMarkerClickListener(marker -> {
+            Log.i(TAG, "onMarkerClick: marker "+marker.getTitle());
+            startActivity(new Intent(MapsKost.this, Detailkos_activity.class).putExtra("id", marker.getSnippet()));
+            return false;
+        });
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -167,7 +175,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
                 if(kosts > 0){
                     Log.i(TAG, "success: "+response.get(0).getNamakos());
                     for(int i=0;i<kosts;i++){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()));
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()).snippet(response.get(i).getId()));
                     }
                     boundsLocation(location_device, new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())));
                 }else {
