@@ -26,8 +26,8 @@ import java.util.Map;
 
 public class checkout_activity extends AppCompatActivity {
 
-    TextView txt_lamakos,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,txt_mulaikos,txt_jumlkamar;
-    String id,namakos,namapemilik,namapenyewa,jumlahkamar,tgl_kos,harga,lamasewa;
+    TextView txt_lamakos,txt_namakamar,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,txt_mulaikos,txt_jumlkamar;
+    String id,id_kos,id_pemilik,id_penyewa,namakamar,namakos,namapemilik,namapenyewa,jumlahkamar,tgl_kos,harga,lamasewa;
     SessionManager sessionManager;
     Button btn_bayarsekarang,btn_bayarnanti;
 
@@ -36,7 +36,7 @@ public class checkout_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         txt_lamakos = findViewById(R.id.txt_lamakos);
-        txt_id = findViewById(R.id.txt_id);
+        txt_namakamar = findViewById(R.id.txt_namakamar);
         txt_namakos = findViewById(R.id.txt_namakos);
         txt_namapemilik = findViewById(R.id.txt_namapemilik);
         txt_harga = findViewById(R.id.txt_harga);
@@ -50,7 +50,11 @@ public class checkout_activity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
 
         id = getIntent().getStringExtra("id");
-        txt_id.setText(id);
+        id_kos = getIntent().getStringExtra("id_kos");
+        id_pemilik = getIntent().getStringExtra("id_pemilik");
+        id_penyewa = getIntent().getStringExtra("id_penyewa");
+        namakamar = getIntent().getStringExtra("namakamar");
+        txt_namakamar.setText(namakamar);
         namakos= getIntent().getStringExtra("namakos");
         txt_namakos.setText(namakos);
         namapemilik= getIntent().getStringExtra("namapemilik");
@@ -70,7 +74,9 @@ public class checkout_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent pindahhalaman = new Intent(checkout_activity.this,FormBukti_activity.class);
-                pindahhalaman.putExtra("id",id);
+                pindahhalaman.putExtra("id_kos",id_kos);
+                pindahhalaman.putExtra("id_pemilik",id_pemilik);
+                pindahhalaman.putExtra("id_penyewa",id_penyewa);
                 pindahhalaman.putExtra("hargakos",harga);
                 pindahhalaman.putExtra("namapemilik",namapemilik);
                 pindahhalaman.putExtra("namapenyewa", namapenyewa);
@@ -78,6 +84,7 @@ public class checkout_activity extends AppCompatActivity {
                 pindahhalaman.putExtra("tgl_kos",tgl_kos);
                 pindahhalaman.putExtra("lamasewa",lamasewa);
                 pindahhalaman.putExtra("namakos",namakos);
+                pindahhalaman.putExtra("namakamar",namakamar);
                 startActivity(pindahhalaman);
             }
         });
@@ -122,7 +129,9 @@ public class checkout_activity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                params.put("id",id);
+                params.put("id_kos",id_kos);
+                params.put("id_pemilik",id_pemilik);
+                params.put("id_penyewa",id_penyewa);
                 params.put("hargakos",harga);
                 params.put("namapemilik",namapemilik);
                 params.put("namapenyewa",namapenyewa);
@@ -130,6 +139,7 @@ public class checkout_activity extends AppCompatActivity {
                 params.put("tgl_kos",tgl_kos);
                 params.put("lamasewa",lamasewa);
                 params.put("namakos",namakos);
+                params.put("namakamar",namakamar);
                 return params;
             }
         };

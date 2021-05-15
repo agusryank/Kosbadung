@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kosbadung.session.SessionManager;
 
@@ -117,32 +118,45 @@ public class Formsewa_activity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                Toast.makeText(Formsewa_activity.this,"Lama Sewa Belum Dipilih",Toast.LENGTH_SHORT);
             }
         });
 
         btn_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int sharga = Integer.parseInt(txt_harga.getText().toString());
-                int sbulan = Integer.parseInt(tv_bulan.getText().toString());
-                int shasil = sharga*sbulan;
-                tv_hasil.setText(String.valueOf(shasil));
-                Intent pindahhalaman = new Intent(Formsewa_activity.this,checkout_activity.class);
-                pindahhalaman.putExtra("id",id);
-                pindahhalaman.putExtra("namakamar",namakamar);
-                pindahhalaman.putExtra("id_kos",id_kos);
-                pindahhalaman.putExtra("namakos",txt_namakos.getText().toString());
-                pindahhalaman.putExtra("id_pemilik",id_pemilik);
-                pindahhalaman.putExtra("namapemilik",namapemilik);
-                pindahhalaman.putExtra("id_penyewa",id_penyewa);
-                pindahhalaman.putExtra("namapenyewa",namapenyewa);
-                pindahhalaman.putExtra("jumlahkamar",edt_jumlahkamar.getText().toString());
-                pindahhalaman.putExtra("tgl_kos",txt_calendar.getText().toString());
-                pindahhalaman.putExtra("hargakos",tv_hasil.getText().toString());
-                pindahhalaman.putExtra("lamasewa",tv_bulan.getText().toString());
-                startActivity(pindahhalaman);
 
+                if(edt_jumlahkamar.getText().toString().isEmpty()){
+                    edt_jumlahkamar.setError("Belum memilih Jumlah Kamar!");
+                    edt_jumlahkamar.requestFocus();
+                    return;
+                }
+                if (txt_calendar.getText().toString().isEmpty()) {
+                    txt_calendar.setError("Belum memilih Tanggal!");
+                    txt_calendar.requestFocus();
+                    return;
+                } else {
+
+                    int sharga = Integer.parseInt(txt_harga.getText().toString());
+                    int sbulan = Integer.parseInt(tv_bulan.getText().toString());
+                    int skamar = Integer.parseInt(edt_jumlahkamar.getText().toString());
+                    int shasil = (sharga * sbulan) * skamar;
+                    tv_hasil.setText(String.valueOf(shasil));
+                    Intent pindahhalaman = new Intent(Formsewa_activity.this, checkout_activity.class);
+                    pindahhalaman.putExtra("id", id);
+                    pindahhalaman.putExtra("namakamar", namakamar);
+                    pindahhalaman.putExtra("id_kos", id_kos);
+                    pindahhalaman.putExtra("namakos", txt_namakos.getText().toString());
+                    pindahhalaman.putExtra("id_pemilik", id_pemilik);
+                    pindahhalaman.putExtra("namapemilik", namapemilik);
+                    pindahhalaman.putExtra("id_penyewa", id_penyewa);
+                    pindahhalaman.putExtra("namapenyewa", namapenyewa);
+                    pindahhalaman.putExtra("jumlahkamar", edt_jumlahkamar.getText().toString());
+                    pindahhalaman.putExtra("tgl_kos", txt_calendar.getText().toString());
+                    pindahhalaman.putExtra("hargakos", tv_hasil.getText().toString());
+                    pindahhalaman.putExtra("lamasewa", tv_bulan.getText().toString());
+                    startActivity(pindahhalaman);
+                }
             }
         });
     }

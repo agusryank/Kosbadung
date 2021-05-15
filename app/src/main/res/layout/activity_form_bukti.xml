@@ -33,15 +33,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Id Transaksi : "
+                    android:text="Jumlah Kamar : "
                     android:textSize="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"/>
                 <TextView
-                    android:id="@+id/txt_id"
+                    android:id="@+id/txt_jumlahkamar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Id Transaksi"
+                    android:text="xxx"
                     android:textSize="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"/>
@@ -110,14 +110,30 @@
                     android:textSize="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                 <Button
-                    android:id="@+id/buttonimage"
+                    android:id="@+id/buttoncamera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:text="Pilih Gambar"
+                    android:text="Pilih Dari Kamera"
                     />
+
+                <Button
+                    android:id="@+id/buttongalery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Pilih Dari Galeri"
+                    />
+
+                </LinearLayout>
 
         </LinearLayout>
 

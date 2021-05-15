@@ -14,7 +14,7 @@ public class InitLibrary {
     public static Retrofit setInit(){
             if (retrofit==null) {
                 retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.1.7/kosbadung/api/")
+                        .baseUrl("http://192.168.100.110/kosbadung/api/")
                         .addConverterFactory(GsonConverterFactory.create(gson))
                         .build();
             }

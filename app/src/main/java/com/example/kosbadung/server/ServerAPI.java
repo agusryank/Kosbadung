@@ -3,7 +3,7 @@ package com.example.kosbadung.server;
 public class ServerAPI {
 
     //Url
-    public static final String URL = "192.168.1.7/";
+    public static final String URL = "192.168.100.110";
 
     //Phpnative
     public static final String URL_read_listkos ="http://"+URL+"/kosbadung/androidAPI/read_listkos.php";
