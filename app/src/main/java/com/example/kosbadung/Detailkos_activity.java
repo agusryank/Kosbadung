@@ -104,6 +104,7 @@ public class Detailkos_activity extends AppCompatActivity {
                 Intent intent =new Intent(Detailkos_activity.this,MapsActivity.class);
                 intent.putExtra("latitude",latitude.getText().toString());
                 intent.putExtra("longtitude",longtitude.getText().toString());
+                intent.putExtra("kost_name",txt_namakos.getText().toString());
                 startActivity(intent);
             }
         });

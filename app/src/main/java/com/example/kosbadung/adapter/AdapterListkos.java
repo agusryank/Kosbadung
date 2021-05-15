@@ -67,13 +67,10 @@ public class AdapterListkos extends RecyclerView.Adapter<AdapterListkos.HolderDa
             id_kos = view.findViewById(R.id.id_kos);
             fotokos = view.findViewById(R.id.fotokos);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(view.getContext(), Detailkos_activity.class);
-                    intent.putExtra("id",id_kos.getText().toString());
-                    view.getContext().startActivity(intent);
-                }
+            view.setOnClickListener(v -> {
+                Intent intent = new Intent(view.getContext(), Detailkos_activity.class);
+                intent.putExtra("id",id_kos.getText().toString());
+                view.getContext().startActivity(intent);
             });
         }
 

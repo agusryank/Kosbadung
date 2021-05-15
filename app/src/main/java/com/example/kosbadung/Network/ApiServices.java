@@ -13,5 +13,10 @@ public interface ApiServices {
             @Field("longitude") double longitude,
             @Field("radius") int radius
     );
+    @FormUrlEncoded
+    @POST("getKostByDistricts")
+    Call<List<ResponseGetKost>> get_by_districts(
+            @Field("kecamatan") String kecamatan
+    );
 
 }

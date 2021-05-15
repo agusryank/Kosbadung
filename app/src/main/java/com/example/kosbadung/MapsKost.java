@@ -11,9 +11,15 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kosbadung.Util.GetKost;
+import com.example.kosbadung.Util.GetKostByDistricts;
 import com.example.kosbadung.Util.GetLocation;
 import com.example.kosbadung.adapter.ResponseGetKost;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -41,6 +47,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     public static final int PERMISSIONS_REQUEST = 1;
     LatLng location_device;
+    Spinner dropdown;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +57,71 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+        dropdown = findViewById(R.id.spinner1);
+
+        String[] items = new String[]{"Lokasi Anda", "Kuta Utara", "Kuta Selatan", "Kuta", "Kuta Tengah", "Petang"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+        
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        getKostArround();
+                        break;
+                    case 1:
+                        getKostByDistricts("Kuta Utara");
+                        break;
+                    case 2:
+                        getKostByDistricts("Kuta Selatan");
+                        break;
+                    case 3:
+                        getKostByDistricts("Kuta");
+                        break;
+                    case 4:
+                        getKostByDistricts("Kuta Tengah");
+                        break;
+                    case 5:
+                        getKostByDistricts("Petang");
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i(TAG, "onNothingSelected: no selected");
+            }
+        });
+
         permissionCheck();
-        getKostArround();
+    }
+    private void getKostByDistricts(String districts_name){
+        mMap.clear();
+        new GetKostByDistricts(districts_name, new GetKostByDistricts.Listener() {
+            @Override
+            public void success(List<ResponseGetKost> response) {
+                int kosts = response.size();
+                Log.i(TAG, "success: "+kosts);
+                if(kosts > 0){
+                    Log.i(TAG, "success: "+response.get(0).getNamakos());
+                    for(int i=0;i<kosts;i++){
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()));
+                    }
+                    boundsLocation(new LatLng(Double.parseDouble(response.get(0).getLatitude()), Double.parseDouble(response.get(0).getLongtitude())),
+                            new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())));
+                }else {
+                    Toast.makeText(MapsKost.this, "tidak ada kost di area "+districts_name, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void failed(String msg) {
+                Toast.makeText(MapsKost.this, "error : "+msg, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     @Override
     public void onMapReady(@NotNull GoogleMap googleMap) {
@@ -72,6 +142,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
         Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
         task.addOnSuccessListener(this, locationSettingsResponse -> {
             new GetLocation(MapsKost.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
+            getKostArround();
         });
         task.addOnFailureListener(this, e -> {
             if (e instanceof ResolvableApiException) {
@@ -86,6 +157,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
         });
     }
     private void getKostArround(){
+        mMap.clear();
         int radius = 10;
         new GetLocation(MapsKost.this, (latitude, longitude) -> new GetKost(latitude, longitude, radius, new GetKost.Listener() {
             @Override
@@ -106,7 +178,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
 
             @Override
             public void failed(String msg) {
-                Log.e(TAG, "failed: "+msg);
+                Toast.makeText(MapsKost.this, "error : "+msg, Toast.LENGTH_SHORT).show();
             }
         }));
     }
