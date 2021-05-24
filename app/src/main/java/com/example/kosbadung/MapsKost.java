@@ -63,7 +63,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
 
         dropdown = findViewById(R.id.spinner1);
 
-        String[] items = new String[]{"Lokasi Anda", "Kuta Utara", "Kuta Selatan", "Kuta", "Kuta Tengah", "Petang"};
+        String[] items = new String[]{"Lokasi Anda", "Kuta Utara", "Kuta Selatan", "Kuta", "Abiansemal", "Petang", "Mengwi"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         
@@ -84,10 +84,13 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
                         getKostByDistricts("Kuta");
                         break;
                     case 4:
-                        getKostByDistricts("Kuta Tengah");
+                        getKostByDistricts("Abiansemal");
                         break;
                     case 5:
                         getKostByDistricts("Petang");
+                        break;
+                    case 6:
+                        getKostByDistricts("Mengwi");
                         break;
 
                 }
@@ -101,6 +104,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
 
         permissionCheck();
     }
+
     private void getKostByDistricts(String districts_name){
         mMap.clear();
         new GetKostByDistricts(districts_name, new GetKostByDistricts.Listener() {
@@ -114,9 +118,9 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
                         mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()).snippet(response.get(i).getId()));
                     }
                     boundsLocation(new LatLng(Double.parseDouble(response.get(0).getLatitude()), Double.parseDouble(response.get(0).getLongtitude())),
-                            new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())));
+                            new LatLng(Double.parseDouble(response.get(0).getLatitude()), Double.parseDouble(response.get(0).getLongtitude())));
                 }else {
-                    Toast.makeText(MapsKost.this, "tidak ada kost di area "+districts_name, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MapsKost.this, "Tidak ada kost di area "+districts_name, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -126,13 +130,14 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
             }
         });
     }
+
     @Override
     public void onMapReady(@NotNull GoogleMap googleMap) {
         Log.d("HOME", "OnMapReady Triger");
         mMap = googleMap;
         mMap.setMaxZoomPreference(18);
         mMap.setOnMarkerClickListener(marker -> {
-            Log.i(TAG, "onMarkerClick: marker "+marker.getTitle());
+            Log.i(TAG, "onMarkerClick: marker "+ marker.getTitle());
             startActivity(new Intent(MapsKost.this, Detailkos_activity.class).putExtra("id", marker.getSnippet()));
             return false;
         });
@@ -150,6 +155,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
         Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
         task.addOnSuccessListener(this, locationSettingsResponse -> {
             new GetLocation(MapsKost.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
+            Log.i(TAG, "onMapReady: lokasi lat : "+location_device.latitude+" lng : "+location_device.longitude);
             getKostArround();
         });
         task.addOnFailureListener(this, e -> {
@@ -164,6 +170,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
             }
         });
     }
+
     private void getKostArround(){
         mMap.clear();
         int radius = 10;
@@ -171,13 +178,15 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void success(List<ResponseGetKost> response) {
                 int kosts = response.size();
-                Log.i(TAG, "success: "+kosts);
+                Log.i(TAG, "success: "+ kosts);
+              // lokasi perangkat -> kost terjauh
                 if(kosts > 0){
                     Log.i(TAG, "success: "+response.get(0).getNamakos());
                     for(int i=0;i<kosts;i++){
                         mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()).snippet(response.get(i).getId()));
                     }
-                    boundsLocation(location_device, new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())));
+                    boundsLocation(new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())),
+                            new LatLng(Double.parseDouble(response.get(0).getLatitude()), Double.parseDouble(response.get(0).getLongtitude())));
                 }else {
                     Log.i(TAG, "success: tidak ada kost terdekat diradius "+radius+" km");
                     Toast.makeText(MapsKost.this, "tidak ada kost terdekat diradius "+radius+" km", Toast.LENGTH_LONG).show();
@@ -190,11 +199,12 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
             }
         }));
     }
+
     private void boundsLocation(LatLng start, LatLng end){
         new GetLocation(MapsKost.this, (latitude, longitude) -> location_device = new LatLng(latitude, longitude));
         if(!(location_device == null)){
             LatLngBounds latLngBounds = new LatLngBounds(start, end);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 12));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 13));
         }else {
             if(!isFinishing()){
                 Log.e(TAG, "boundsLocation: lokasi tidak ditemukan");
