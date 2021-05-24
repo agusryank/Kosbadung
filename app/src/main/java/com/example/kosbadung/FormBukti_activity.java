@@ -129,17 +129,6 @@ public class FormBukti_activity extends AppCompatActivity {
                 }
                 break;
         }
-        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-
-        }
-        imgaeuri = data.getData();
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(FormBukti_activity.this.getContentResolver(), imgaeuri);
-            BitMapToString(bitmap);
-            imageView.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            Log.i("TAG", "Some exception " + e);
-        }
     }
 
     private void simpan_data(){
