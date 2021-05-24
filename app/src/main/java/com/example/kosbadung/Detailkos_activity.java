@@ -37,14 +37,12 @@ import java.util.Map;
 
 public class Detailkos_activity extends AppCompatActivity {
 
-//    String idkos,namakos,namakecamatan,namapemilik,deskripsi,harga,jmlkamar;
     MapView maps;
     TextView txt_idkos,txt_namakos,txt_namakec,txt_harga,txt_namapemilik,txt_deskripsi,txt_jmlkamar,latitude,longtitude;
     String id;
     Button btn_sewa;
     ImageView foto1,foto2,foto3,foto4;
     ImageView imageView;
-//    RelativeLayout r_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,40 +65,15 @@ public class Detailkos_activity extends AppCompatActivity {
         longtitude=findViewById(R.id.longtitude);
         txt_jmlkamar = findViewById(R.id.txt_jumlkamar);
         imageView = findViewById(R.id.maps);
-//        r_fragment = findViewById(R.id.r_fragment);
-//        maps = findViewById(R.id.maps);
 
         id = getIntent().getStringExtra("id");
         txt_idkos.setText(id);
 
 
-//        maps.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Uri gmmIntentUri = Uri.parse("geo:-8.673500, 115.212898");
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                startActivity(mapIntent);
-//            }
-//        });
-
-//        r_fragment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Uri gmmIntentUri = Uri.parse("geo:-8.673500, 115.212898");
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                startActivity(mapIntent);
-//            }
-//        });
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Uri gmmIntentUri = Uri.parse("geo:-8.7999113,115.1673603");
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                startActivity(mapIntent);
+
                 Intent intent =new Intent(Detailkos_activity.this,MapsActivity.class);
                 intent.putExtra("latitude",latitude.getText().toString());
                 intent.putExtra("longtitude",longtitude.getText().toString());

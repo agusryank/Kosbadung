@@ -1,11 +1,11 @@
 package com.example.kosbadung.model;
 
 public class Modelkos {
-    String  id,Namakos,Namapemilik,Latitude,Longtitude,foto1,foto2,foto3,foto4,Deskripsi,Kecamatan,Status;
+    String  id,Namakos,Namapemilik,Latitude,Longtitude,foto1,foto2,foto3,foto4,Deskripsi,Kecamatan,Status,Aktif;
 
     public Modelkos(){}
 
-    public Modelkos(String id, String namakos, String namapemilik, String latitude, String longtitude, String foto1, String foto2, String foto3, String foto4, String deskripsi, String kecamatan, String status) {
+    public Modelkos(String id, String namakos, String namapemilik, String latitude, String longtitude, String foto1, String foto2, String foto3, String foto4, String deskripsi, String kecamatan, String status, String aktif) {
         this.id = id;
         Namakos = namakos;
         Namapemilik = namapemilik;
@@ -18,6 +18,7 @@ public class Modelkos {
         Deskripsi = deskripsi;
         Kecamatan = kecamatan;
         Status = status;
+        Aktif = aktif;
     }
 
     public String getId() {
@@ -114,5 +115,13 @@ public class Modelkos {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getAktif() {
+        return Aktif;
+    }
+
+    public void setAktif(String aktif) {
+        Aktif = aktif;
     }
 }

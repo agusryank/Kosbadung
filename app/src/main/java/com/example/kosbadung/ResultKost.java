@@ -1,4 +1,4 @@
-package com.example.kosbadung.listkos;
+package com.example.kosbadung;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.kosbadung.R;
-import com.example.kosbadung.ResultKos;
 import com.example.kosbadung.adapter.AdapterListkos;
+import com.example.kosbadung.listkos.ListActivity;
 import com.example.kosbadung.model.Modelkos;
 import com.example.kosbadung.server.AppController;
 import com.example.kosbadung.server.ServerAPI;
@@ -35,26 +34,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListActivity extends AppCompatActivity {
+public class ResultKost extends AppCompatActivity {
 
     private Spinner sp_kecamatan;
-    private String[] list = {"Semua","Kuta Selatan","Kuta Utara","Petang","Abiansemal","Kuta","Mengwi"};
+    private String[] list = {"-Pilih-","Semua","Kuta Selatan","Kuta Utara","Petang","Abiansemal","Kuta","Mengwi"};
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
     List<Modelkos> mItems;
     TextView tv_kecamatan;
-    String Skecamatan;
     ProgressDialog pd;
+    String Skecamatan,SSkecamatan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_result_kost);
 
+        SSkecamatan = getIntent().getStringExtra("kecamatan");
         sp_kecamatan = findViewById(R.id.sp_kecamatan);
         tv_kecamatan = findViewById(R.id.tv_kecamatan);
-        pd = new ProgressDialog(ListActivity.this);
+        pd = new ProgressDialog(ResultKost.this);
         ArrayAdapter adapter_kecamatan= new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, list);
         adapter_kecamatan.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         sp_kecamatan.setAdapter(adapter_kecamatan);
@@ -77,7 +77,7 @@ public class ListActivity extends AppCompatActivity {
                     pd.setMessage("Memuat Data Kos" + Skecamatan);
                     pd.setCancelable(false);
                     pd.show();
-                    Intent intent = new Intent(ListActivity.this, ResultKos.class);
+                    Intent intent = new Intent(ResultKost.this, ResultKos.class);
                     intent.putExtra("kecamatan",Skecamatan);
                     startActivity(intent);
                     finish();
@@ -85,7 +85,7 @@ public class ListActivity extends AppCompatActivity {
                     pd.setMessage("Memuat Data Kos"+Skecamatan);
                     pd.setCancelable(false);
                     pd.show();
-                    Intent intent = new Intent(ListActivity.this, ResultKos.class);
+                    Intent intent = new Intent(ResultKost.this, ResultKos.class);
                     intent.putExtra("kecamatan",Skecamatan);
                     startActivity(intent);
                     finish();
@@ -93,7 +93,7 @@ public class ListActivity extends AppCompatActivity {
                     pd.setMessage("Memuat Data Kos"+Skecamatan);
                     pd.setCancelable(false);
                     pd.show();
-                    Intent intent = new Intent(ListActivity.this, ResultKos.class);
+                    Intent intent = new Intent(ResultKost.this, ResultKos.class);
                     intent.putExtra("kecamatan",Skecamatan);
                     startActivity(intent);
                     finish();
@@ -101,7 +101,7 @@ public class ListActivity extends AppCompatActivity {
                     pd.setMessage("Memuat Data Kos"+Skecamatan);
                     pd.setCancelable(false);
                     pd.show();
-                    Intent intent = new Intent(ListActivity.this, ResultKos.class);
+                    Intent intent = new Intent(ResultKost.this, ResultKos.class);
                     intent.putExtra("kecamatan",Skecamatan);
                     startActivity(intent);
                     finish();
@@ -109,33 +109,38 @@ public class ListActivity extends AppCompatActivity {
                     pd.setMessage("Memuat Data Kos"+Skecamatan);
                     pd.setCancelable(false);
                     pd.show();
-                    Intent intent = new Intent(ListActivity.this, ResultKos.class);
+                    Intent intent = new Intent(ResultKost.this, ResultKos.class);
                     intent.putExtra("kecamatan",Skecamatan);
                     startActivity(intent);
                     finish();
-                }else if (tv_kecamatan.getText().toString().equals("Mengwi")){
-                    pd.setMessage("Memuat Data Kos"+Skecamatan);
+                }else if (tv_kecamatan.getText().toString().equals("Mengwi")) {
+                    pd.setMessage("Memuat Data Kos" + Skecamatan);
                     pd.setCancelable(false);
                     pd.show();
-                    Intent intent = new Intent(ListActivity.this, ResultKos.class);
-                    intent.putExtra("kecamatan",Skecamatan);
+                    Intent intent = new Intent(ResultKost.this, ResultKos.class);
+                    intent.putExtra("kecamatan", Skecamatan);
                     startActivity(intent);
                     finish();
-
-
-                }
+                }else if (tv_kecamatan.getText().toString().equals("Semua")) {
+                        pd.setMessage("Memuat Data Semua Kos");
+                        pd.setCancelable(false);
+                        pd.show();
+                        Intent intent = new Intent(ResultKost.this, ListActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                tv_kecamatan.setText("Semua");
+                tv_kecamatan.setText("-Pilih-");
             }
         });
     }
 
     private void tampilkos(){
 
-        StringRequest selectkos = new StringRequest(Request.Method.POST, ServerAPI.URL_read_listkos,
+        StringRequest selectkos = new StringRequest(Request.Method.POST, ServerAPI.URL_read_listkos_by_kecamatan,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -172,12 +177,13 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("volley", "error : " +error.getMessage());
-                Toast.makeText(ListActivity.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ResultKost.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
+                params.put("kecamatan",SSkecamatan);
                 return params;
             }
         };

@@ -74,7 +74,7 @@
                             android:layout_height="wrap_content"
                             android:paddingRight="5dp"
                             android:gravity="center|left"
-                            android:text="Kecamatan"
+                            android:text="Kecamatan:"
                             android:textColor="#000000" />
 
                         <TextView
@@ -85,6 +85,41 @@
                             android:layout_marginBottom="5dp"
                             android:gravity="center|left"
                             android:text="xxx"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="5dp"
+                            android:gravity="center|left"
+                            android:text="Jumlah Kamar:"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/tv_jumlahkamar"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:gravity="center|left"
+                            android:text="0"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center|left"
+                            android:text="Kamar"
                             android:textColor="#000000" />
                     </LinearLayout>
 
