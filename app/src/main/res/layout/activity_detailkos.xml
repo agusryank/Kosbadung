@@ -191,6 +191,7 @@
                     android:id="@+id/longtitude"/>
                 <ImageButton
                     android:id="@+id/maps"
+                    android:src="@drawable/ic_maps"
                     android:layout_width="100dp"
                     android:layout_height="100dp"/>
 

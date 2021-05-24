@@ -28,7 +28,7 @@ public class Formsewa_activity extends AppCompatActivity {
     String id,namakamar,id_kos,namakos,id_pemilik,namapemilik,harga,id_penyewa,namapenyewa,hasil;
     Calendar cl;
     DatePickerDialog dpl;
-    TextView txt_calendar,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,tv_bulan,tv_hasil,txt_namakamar,txt_idkos,txt_idpemilik,txt_idpenyewa;
+    TextView value_hasil,txt_calendar,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,tv_bulan,tv_hasil,txt_namakamar,txt_idkos,txt_idpemilik,txt_idpenyewa;
     ImageView img_calendar;
     SessionManager sessionManager;
     EditText edt_jumlahkamar;
@@ -45,6 +45,7 @@ public class Formsewa_activity extends AppCompatActivity {
         txt_namakamar = findViewById(R.id.txt_namakamar);
         txt_harga = findViewById(R.id.txt_harga);
         txt_calendar = findViewById(R.id.txt_calendar);
+        value_hasil = findViewById(R.id.value_hasil);
         edt_jumlahkamar = findViewById(R.id.txt_jumlkamar);
         img_calendar = findViewById(R.id.img_calendar);
         txt_namapenyewa = findViewById(R.id.txt_namapenyewa);
@@ -75,7 +76,9 @@ public class Formsewa_activity extends AppCompatActivity {
                 dpl = new  DatePickerDialog(Formsewa_activity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        txt_calendar.setText(year + "-" + month + "-" + dayOfMonth);
+                        int value = Integer.parseInt(value_hasil.getText().toString());
+                        int hasil = month + value;
+                        txt_calendar.setText(year + "-" + hasil + "-" + dayOfMonth);
                     }
                 }, year,month,day);
                 dpl.show();
