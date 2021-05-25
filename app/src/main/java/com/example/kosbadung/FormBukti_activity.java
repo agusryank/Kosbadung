@@ -117,19 +117,28 @@ public class FormBukti_activity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
-            case(CAMERA_REQUEST_CODE) :
-                if(resultCode == Activity.RESULT_OK){
-                    bitmap_bukti = (Bitmap) data.getExtras().get("data");
-                    BitMapToString(bitmap_bukti);
-                    imageView.setImageBitmap(bitmap_bukti);
-                    imagename.setText("Upload Image Sucess");
-                }
-                break;
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            BitMapToString(imageBitmap);
+            imageView.setImageBitmap(imageBitmap);
+            imagename.setText("Upload Image Sucess");
         }
-    }
+        else if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK ) {
+            imgaeuri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(FormBukti_activity.this.getContentResolver(), imgaeuri);
+                BitMapToString(bitmap);
+                imageView.setImageBitmap(bitmap);
+                imagename.setText("Upload Image Sucess");
+            } catch (IOException e) {
+                Log.i("TAG", "Some exception " + e);
+            }
+        }
+
+        }
 
     private void simpan_data(){
         StringRequest insertData = new StringRequest(Request.Method.POST, ServerAPI.URL_transaksi_langsung, new Response.Listener<String>() {
