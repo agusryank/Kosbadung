@@ -74,6 +74,7 @@ public class checkout_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent pindahhalaman = new Intent(checkout_activity.this,FormBukti_activity.class);
+                pindahhalaman.putExtra("id",id);
                 pindahhalaman.putExtra("id_kos",id_kos);
                 pindahhalaman.putExtra("id_pemilik",id_pemilik);
                 pindahhalaman.putExtra("id_penyewa",id_penyewa);
@@ -129,6 +130,7 @@ public class checkout_activity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
+                params.put("id",id);
                 params.put("id_kos",id_kos);
                 params.put("id_pemilik",id_pemilik);
                 params.put("id_penyewa",id_penyewa);

@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ResultKost"></activity>
+        <activity android:name=".dialog.GaleryActivity"></activity>
+        <activity android:name=".dialog.CameraActivity" />
+        <activity android:name=".ResultKost" />
         <activity android:name=".ResultKos" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

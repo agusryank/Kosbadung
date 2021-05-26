@@ -26,6 +26,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.kosbadung.dialog.CameraActivity;
+import com.example.kosbadung.dialog.GaleryActivity;
 import com.example.kosbadung.server.AppController;
 import com.example.kosbadung.server.ServerAPI;
 
@@ -39,18 +41,11 @@ import java.util.Map;
 
 public class FormBukti_activity extends AppCompatActivity {
 
-    String id,namakos,namapemilik,namapenyewa,jumlahkamar,hargakos,tgl_kos,lamasewa;
+    String id,id_kos,id_pemilik,id_penyewa,namakos,namapemilik,namapenyewa,namakamar,jumlahkamar,hargakos,tgl_kos,lamasewa;
     TextView txt_jumlahkamar,txt_harga;
     TextView imagename;
     ImageView imageView;
     Button buttoncamera,buttongaleri,simpan;
-    public static Bitmap bitmap_bukti;
-    private static final int IMAGE_PICK_CODE = 1;
-    private static final int PERMISSION_CODE = 2;
-    public static final int CAMERA_REQUEST_CODE  = 1;
-    Uri imgaeuri;
-    String foto_bukti="kosong";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,140 +63,60 @@ public class FormBukti_activity extends AppCompatActivity {
         txt_jumlahkamar.setText(jumlahkamar);
         hargakos = getIntent().getStringExtra("hargakos");
         txt_harga.setText(hargakos);
+        id = getIntent().getStringExtra("id");
+        id_kos = getIntent().getStringExtra("id_kos");
+        id_pemilik = getIntent().getStringExtra("id_pemilik");
+        id_penyewa = getIntent().getStringExtra("id_penyewa");
+        namakamar = getIntent().getStringExtra("namakamar");
         namakos = getIntent().getStringExtra("namakos");
         namapemilik = getIntent().getStringExtra("namapemilik");
         namapenyewa = getIntent().getStringExtra("namapenyewa");
-        jumlahkamar = getIntent().getStringExtra("jumlahkamar");
         tgl_kos = getIntent().getStringExtra("tgl_kos");
         lamasewa = getIntent().getStringExtra("lamasewa");
 
         buttoncamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(intent.resolveActivity(getPackageManager())!=null){
-                    startActivityForResult(intent, CAMERA_REQUEST_CODE);
-                }
+                CameraActivity cameraActivity = new CameraActivity();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                bundle.putString("id_kos", id_kos);
+                bundle.putString("id_pemilik", id_pemilik);
+                bundle.putString("id_penyewa", id_penyewa);
+                bundle.putString("namakamar", namakamar);
+                bundle.putString("namakos", namakos);
+                bundle.putString("namapemilik", namapemilik);
+                bundle.putString("namapenyewa", namapenyewa);
+                bundle.putString("tgl_kos", tgl_kos);
+                bundle.putString("lamasewa", lamasewa);
+                bundle.putString("jumlahkamar", jumlahkamar);
+                bundle.putString("hargakos", hargakos);
+                cameraActivity.show(getSupportFragmentManager(), "example dialog");
+
             }
         });
 
         buttongaleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ActivityCompat.checkSelfPermission(FormBukti_activity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permission, PERMISSION_CODE);
-                    } else {
-                        ImagePick();
-                    }
-                }
-                else{
-                    ImagePick();
-                }
+
+                GaleryActivity galeryActivity = new GaleryActivity();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                bundle.putString("id_kos", id_kos);
+                bundle.putString("id_pemilik", id_pemilik);
+                bundle.putString("id_penyewa", id_penyewa);
+                bundle.putString("namakamar", namakamar);
+                bundle.putString("namakos", namakos);
+                bundle.putString("namapemilik", namapemilik);
+                bundle.putString("namapenyewa", namapenyewa);
+                bundle.putString("tgl_kos", tgl_kos);
+                bundle.putString("lamasewa", lamasewa);
+                bundle.putString("jumlahkamar", jumlahkamar);
+                bundle.putString("hargakos", hargakos);
+                galeryActivity.show(getSupportFragmentManager(), "example dialog");
+
             }
         });
-
-        simpan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                simpan_data();
-            }
-        });
-    }
-    private void BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100,baos);
-        byte[]arr=baos.toByteArray();
-        foto_bukti = Base64.encodeToString(arr,Base64.DEFAULT);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            BitMapToString(imageBitmap);
-            imageView.setImageBitmap(imageBitmap);
-            imagename.setText("Upload Image Sucess");
-        }
-        else if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK ) {
-            imgaeuri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(FormBukti_activity.this.getContentResolver(), imgaeuri);
-                BitMapToString(bitmap);
-                imageView.setImageBitmap(bitmap);
-                imagename.setText("Upload Image Sucess");
-            } catch (IOException e) {
-                Log.i("TAG", "Some exception " + e);
-            }
-        }
-
-        }
-
-    private void simpan_data(){
-        StringRequest insertData = new StringRequest(Request.Method.POST, ServerAPI.URL_transaksi_langsung, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("volley", "response insert to db : " + response.toString());
-                try {
-                    JSONObject data = new JSONObject(response);
-                    String status_respon;
-                    status_respon = data.getString("status");
-
-                    if (status_respon.equals("berhasil")) {
-                        Toast.makeText(FormBukti_activity.this, "Berhasil Menyimpan Data", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(FormBukti_activity.this, BerandaActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Log.d("volley", "error insert tb : "+response.toString());
-                        Toast.makeText(FormBukti_activity.this, "Gagal Menyimpan Data", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("volley", "error insert tb : "+error.getMessage());
-                Toast.makeText(FormBukti_activity.this, "Kesalahan Server", Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams(){
-            Map<String, String> params = new HashMap<>();
-            params.put("id",id);
-            params.put("namakos",namakos);
-            params.put("namapemilik",namapemilik);
-            params.put("namapenyewa",namapenyewa);
-            params.put("bukti",foto_bukti);
-            params.put("tgl_kos",tgl_kos);
-            params.put("lamasewa",lamasewa);
-            params.put("jumlahkamar",jumlahkamar);
-            params.put("hargakos",hargakos);
-            return params;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(insertData);
-    }
-    private void ImagePick(){
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, IMAGE_PICK_CODE);
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_CODE: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ImagePick();
-                } else {
-                    Toast.makeText(FormBukti_activity.this, "Permission denied", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
     }
 }
