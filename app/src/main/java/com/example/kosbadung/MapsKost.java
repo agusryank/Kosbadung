@@ -185,7 +185,7 @@ public class MapsKost extends FragmentActivity implements OnMapReadyCallback {
                     for(int i=0;i<kosts;i++){
                         mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(response.get(i).getLatitude()), Double.parseDouble(response.get(i).getLongtitude()))).title(response.get(i).getNamakos()).snippet(response.get(i).getId()));
                     }
-                    boundsLocation(new LatLng(Double.parseDouble(response.get(kosts-1).getLatitude()), Double.parseDouble(response.get(kosts-1).getLongtitude())),
+                    boundsLocation(new LatLng(Double.parseDouble(response.get(0).getLatitude()), Double.parseDouble(response.get(0).getLongtitude())),
                             new LatLng(Double.parseDouble(response.get(0).getLatitude()), Double.parseDouble(response.get(0).getLongtitude())));
                 }else {
                     Log.i(TAG, "success: tidak ada kost terdekat diradius "+radius+" km");
