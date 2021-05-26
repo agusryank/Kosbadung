@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".dialog.GaleryActivity"></activity>
+        <activity android:name=".dialog.GaleryDialog"></activity>
+        <activity android:name=".dialog.CameraDialog" />
+        <activity android:name=".dialog.GaleryActivity" />
         <activity android:name=".dialog.CameraActivity" />
         <activity android:name=".ResultKost" />
         <activity android:name=".ResultKos" />

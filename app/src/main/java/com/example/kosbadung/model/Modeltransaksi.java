@@ -2,22 +2,26 @@ package com.example.kosbadung.model;
 
 public class Modeltransaksi {
 
-    String  id,Namakos,Namapemilik,Namauser,Buktipembayaran,Tglmulai,Lamasewa,Jumlahkamar,Totalharga,Status,Pesan;
+    String id,id_namakos,Namakos,id_namapemilik,Namapemilik,id_namauser,Namauser,id_namakamar,Namakamar,Buktipembayaran,Tglmulai,Lamasewa,Jumlahkamar,Totalharga,Status;
 
     public Modeltransaksi(){}
 
-    public Modeltransaksi(String id, String namakos, String namapemilik, String namauser, String buktipembayaran, String tglmulai, String lamasewa, String jumlahkamar, String totalharga, String status, String pesan) {
+    public Modeltransaksi(String id, String id_namakos, String namakos, String id_namapemilik, String namapemilik, String id_namauser, String namauser, String id_namakamar, String namakamar, String buktipembayaran, String tglmulai, String lamasewa, String jumlahkamar, String totalharga, String status) {
         this.id = id;
-        Namakos = namakos;
-        Namapemilik = namapemilik;
-        Namauser = namauser;
-        Buktipembayaran = buktipembayaran;
-        Tglmulai = tglmulai;
-        Lamasewa = lamasewa;
-        Jumlahkamar = jumlahkamar;
-        Totalharga = totalharga;
-        Status = status;
-        Pesan = pesan;
+        this.id_namakos = id_namakos;
+        this.Namakos = namakos;
+        this.id_namapemilik = id_namapemilik;
+        this.Namapemilik = namapemilik;
+        this.id_namauser = id_namauser;
+        this.Namauser = namauser;
+        this.id_namakamar = id_namakamar;
+        this.Namakamar = namakamar;
+        this.Buktipembayaran = buktipembayaran;
+        this.Tglmulai = tglmulai;
+        this.Lamasewa = lamasewa;
+        this.Jumlahkamar = jumlahkamar;
+        this.Totalharga = totalharga;
+        this.Status = status;
     }
 
     public String getId() {
@@ -28,12 +32,28 @@ public class Modeltransaksi {
         this.id = id;
     }
 
+    public String getId_namakos() {
+        return id_namakos;
+    }
+
+    public void setId_namakos(String id_namakos) {
+        this.id_namakos = id_namakos;
+    }
+
     public String getNamakos() {
         return Namakos;
     }
 
     public void setNamakos(String namakos) {
         Namakos = namakos;
+    }
+
+    public String getId_namapemilik() {
+        return id_namapemilik;
+    }
+
+    public void setId_namapemilik(String id_namapemilik) {
+        this.id_namapemilik = id_namapemilik;
     }
 
     public String getNamapemilik() {
@@ -44,12 +64,36 @@ public class Modeltransaksi {
         Namapemilik = namapemilik;
     }
 
+    public String getId_namauser() {
+        return id_namauser;
+    }
+
+    public void setId_namauser(String id_namauser) {
+        this.id_namauser = id_namauser;
+    }
+
     public String getNamauser() {
         return Namauser;
     }
 
     public void setNamauser(String namauser) {
         Namauser = namauser;
+    }
+
+    public String getId_namakamar() {
+        return id_namakamar;
+    }
+
+    public void setId_namakamar(String id_namakamar) {
+        this.id_namakamar = id_namakamar;
+    }
+
+    public String getNamakamar() {
+        return Namakamar;
+    }
+
+    public void setNamakamar(String namakamar) {
+        Namakamar = namakamar;
     }
 
     public String getBuktipembayaran() {
@@ -98,13 +142,5 @@ public class Modeltransaksi {
 
     public void setStatus(String status) {
         Status = status;
-    }
-
-    public String getPesan() {
-        return Pesan;
-    }
-
-    public void setPesan(String pesan) {
-        Pesan = pesan;
     }
 }

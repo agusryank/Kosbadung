@@ -78,16 +78,20 @@ public class RiwayatFragment extends Fragment {
 
                                 Modeltransaksi mk = new Modeltransaksi();
                                 mk.setId(data.getString("id"));
+                                mk.setId_namakos(data.getString("id_namakos"));
                                 mk.setNamakos(data.getString("Namakos"));
+                                mk.setId_namapemilik(data.getString("id_namapemilik"));
                                 mk.setNamapemilik(data.getString("Namapemilik"));
+                                mk.setId_namauser(data.getString("id_namauser"));
                                 mk.setNamauser(data.getString("Namauser"));
+                                mk.setId_namakamar(data.getString("id_namakamar"));
+                                mk.setNamakamar(data.getString("Namakamar"));
                                 mk.setBuktipembayaran(data.getString("Buktipembayaran"));
                                 mk.setTglmulai(data.getString("Tglmulai"));
                                 mk.setLamasewa(data.getString("Lamasewa"));
                                 mk.setJumlahkamar(data.getString("Jumlahkamar"));
                                 mk.setTotalharga(data.getString("Totalharga"));
                                 mk.setStatus(data.getString("Status"));
-                                mk.setPesan(data.getString("Pesan"));
                                 mItems.add(mk);
 
                             } catch (JSONException e) {
