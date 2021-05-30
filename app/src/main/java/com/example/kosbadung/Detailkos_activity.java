@@ -38,9 +38,9 @@ import java.util.Map;
 public class Detailkos_activity extends AppCompatActivity {
 
     MapView maps;
-    TextView txt_idkos,txt_namakos,txt_namakec,txt_harga,txt_namapemilik,txt_deskripsi,txt_jmlkamar,latitude,longtitude;
+    TextView txt_idkos,txt_namakos,txt_namakec,txt_harga,txt_namapemilik,txt_deskripsi,txt_jmlkamar,latitude,longtitude,txt_telp;
     String id;
-    Button btn_sewa;
+    Button btn_sewa, btn_wa;
     ImageView foto1,foto2,foto3,foto4;
     ImageView imageView;
 
@@ -54,12 +54,14 @@ public class Detailkos_activity extends AppCompatActivity {
         foto3 =findViewById(R.id.foto3);
         foto4 =findViewById(R.id.foto4);
         btn_sewa =findViewById(R.id.btn_sewa);
+        btn_wa = findViewById(R.id.btn_wa);
 
         txt_idkos = findViewById(R.id.txt_idkos);
         txt_namakos = findViewById(R.id.txt_namakos);
         txt_namakec = findViewById(R.id.txt_namakec);
         txt_harga = findViewById(R.id.txt_harga);
         txt_namapemilik = findViewById(R.id.txt_namapemilik);
+        txt_telp = findViewById(R.id.txt_telp);
         txt_deskripsi = findViewById(R.id.txt_deskripsi);
         latitude=findViewById(R.id.latitude);
         longtitude=findViewById(R.id.longtitude);
@@ -94,6 +96,14 @@ public class Detailkos_activity extends AppCompatActivity {
 
             }
         });
+
+        btn_wa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         select_detail_kos();
 
     }
