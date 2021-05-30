@@ -23,6 +23,7 @@ import com.example.kosbadung.model.Modelkos;
 import com.example.kosbadung.model.Modeltransaksi;
 import com.example.kosbadung.server.AppController;
 import com.example.kosbadung.server.ServerAPI;
+import com.example.kosbadung.session.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,8 @@ public class CheckoutFragment extends Fragment {
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
+    SessionManager sessionManager;
+    String nama;
     List<Modeltransaksi> mItems;
 
     public CheckoutFragment() {
@@ -52,6 +55,11 @@ public class CheckoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_checkout, container, false);
+
+        sessionManager = new SessionManager(getContext());
+        HashMap<String, String> user = sessionManager.getUserDetail();
+
+        nama = user.get(SessionManager.NAMA_USER);
 
         mRecyclerView = view.findViewById(R.id.listrcycler);
         mItems = new ArrayList<>();
@@ -111,6 +119,7 @@ public class CheckoutFragment extends Fragment {
             @Override
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
+                params.put("nama", nama);
                 return params;
             }
         };

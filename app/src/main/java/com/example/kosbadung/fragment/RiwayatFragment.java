@@ -22,6 +22,7 @@ import com.example.kosbadung.adapter.AdapterTransaksiSukses;
 import com.example.kosbadung.model.Modeltransaksi;
 import com.example.kosbadung.server.AppController;
 import com.example.kosbadung.server.ServerAPI;
+import com.example.kosbadung.session.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,8 @@ public class RiwayatFragment extends Fragment {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
     List<Modeltransaksi> mItems;
+    SessionManager sessionManager;
+    String nama;
 
     public RiwayatFragment() {
         // Required empty public constructor
@@ -51,6 +54,11 @@ public class RiwayatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_riwayat, container, false);
+
+        sessionManager = new SessionManager(getContext());
+        HashMap<String, String> user = sessionManager.getUserDetail();
+
+        nama = user.get(SessionManager.NAMA_USER);
 
         mRecyclerView = view.findViewById(R.id.listrcycler);
         mItems = new ArrayList<>();
@@ -110,6 +118,7 @@ public class RiwayatFragment extends Fragment {
             @Override
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
+                params.put("nama", nama);
                 return params;
             }
         };

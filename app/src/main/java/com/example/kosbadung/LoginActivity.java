@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements EasyPermissions.
                                 Toast.makeText(LoginActivity.this, "Login Berhasil", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(getApplicationContext(),BerandaActivity.class);
                                 startActivity(intent);
+                                finish();
                             } else if (status_login.equals("gagal")){
                                 Toast.makeText(LoginActivity.this, "Username Atau Password salah", Toast.LENGTH_SHORT).show();
                             }
