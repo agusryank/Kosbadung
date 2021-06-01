@@ -1,5 +1,6 @@
 package com.example.kosbadung.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.kosbadung.Detailkamar_activity;
+import com.example.kosbadung.EditProfile;
+import com.example.kosbadung.Formsewa_activity;
 import com.example.kosbadung.R;
 import com.example.kosbadung.session.SessionManager;
 
@@ -21,7 +25,7 @@ import java.util.HashMap;
 public class ProfileFragment extends Fragment {
 
  SessionManager sessionManager;
- Button btn_logout;
+ Button btn_logout,btn_edit_profile;
  TextView txt_nama,txt_alamat,txt_namauser,txt_notelp,txt_kelamin;
  String nama,alamat,namauser,notelp,kelamin;
 
@@ -61,11 +65,25 @@ public class ProfileFragment extends Fragment {
         txt_namauser.setText(namauser);
 
         btn_logout = view.findViewById(R.id.btn_logout);
+        btn_edit_profile = view.findViewById(R.id.btn_edit_profile);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sessionManager = new SessionManager((view.getContext()));
                 sessionManager.logoutUser();
+            }
+        });
+
+        btn_edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), EditProfile.class);
+                intent.putExtra("nama",nama);
+                intent.putExtra("alamat",alamat);
+                intent.putExtra("namauser",namauser);
+                intent.putExtra("kelamin",kelamin);
+                intent.putExtra("notelp",notelp);
+                startActivity(intent);
             }
         });
 

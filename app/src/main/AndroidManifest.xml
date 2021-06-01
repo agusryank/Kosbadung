@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".dialog.GaleryDialog"></activity>
+        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".dialog.GaleryDialog" />
         <activity android:name=".dialog.CameraDialog" />
         <activity android:name=".dialog.GaleryActivity" />
         <activity android:name=".dialog.CameraActivity" />
