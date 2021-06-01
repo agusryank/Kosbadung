@@ -73,7 +73,31 @@ public class RegisterActivity extends AppCompatActivity {
         btn_simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                simpan_data();
+                String Snama = et_nama.getText().toString();
+                String Stelp = et_telp.getText().toString();
+                String Susername = et_username.getText().toString();
+                String Spassword = et_password.getText().toString();
+                String Salamat = et_alamat.getText().toString();
+
+                if (Snama.equals("")){
+                    et_nama.setError("Anda belum menginputkan nama");
+                    et_nama.requestFocus();
+                }if (Stelp.equals("")){
+                    et_telp.setError("Anda belum menginputkan nomor telp");
+                    et_telp.requestFocus();
+                }if (Susername.equals("")){
+                    et_username.setError("Anda belum menginputkan username");
+                    et_username.requestFocus();
+                }if (Spassword.equals("")){
+                    et_password.setError("Anda belum menginputkan password");
+                    et_password.requestFocus();
+                }if (Salamat.equals("")){
+                    et_alamat.setError("Anda belum menginputkan alamat");
+                    et_alamat.requestFocus();
+                }else{
+                    simpan_data();
+                }
+
             }
         });
 
