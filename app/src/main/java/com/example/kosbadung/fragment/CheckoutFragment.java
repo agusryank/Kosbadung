@@ -87,19 +87,20 @@ public class CheckoutFragment extends Fragment {
 
                                 Modeltransaksi mk = new Modeltransaksi();
                                 mk.setId(data.getString("id"));
-                                mk.setId_namakos(data.getString("id_namakos"));
+                                mk.setId_kos(data.getString("id_kos"));
                                 mk.setNamakos(data.getString("Namakos"));
-                                mk.setId_namapemilik(data.getString("id_namapemilik"));
+                                mk.setId_pemilik(data.getString("id_pemilik"));
                                 mk.setNamapemilik(data.getString("Namapemilik"));
-                                mk.setId_namauser(data.getString("id_namauser"));
+                                mk.setId_user(data.getString("id_user"));
                                 mk.setNamauser(data.getString("Namauser"));
-                                mk.setId_namakamar(data.getString("id_namakamar"));
+                                mk.setId_kamar(data.getString("id_kamar"));
                                 mk.setNamakamar(data.getString("Namakamar"));
                                 mk.setBuktipembayaran(data.getString("Buktipembayaran"));
                                 mk.setTglmulai(data.getString("Tglmulai"));
                                 mk.setLamasewa(data.getString("Lamasewa"));
                                 mk.setJumlahkamar(data.getString("Jumlahkamar"));
                                 mk.setTotalharga(data.getString("Totalharga"));
+                                mk.setTgl_transaksi(data.getString("Tgl_transaksi"));
                                 mk.setStatus(data.getString("Status"));
                                 mItems.add(mk);
 

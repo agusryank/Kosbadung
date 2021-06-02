@@ -39,7 +39,7 @@ public class Detailkos_activity extends AppCompatActivity {
 
     MapView maps;
     TextView txt_idkos,txt_namakos,txt_namakec,txt_harga,txt_namapemilik,txt_deskripsi,txt_jmlkamar,latitude,longtitude,txt_telp;
-    String id;
+    String id,telp;
     Button btn_sewa, btn_wa;
     ImageView foto1,foto2,foto3,foto4;
     ImageView imageView;
@@ -70,6 +70,8 @@ public class Detailkos_activity extends AppCompatActivity {
 
         id = getIntent().getStringExtra("id");
         txt_idkos.setText(id);
+        telp = getIntent().getStringExtra("no_telp");
+        txt_telp.setText(telp);
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +102,13 @@ public class Detailkos_activity extends AppCompatActivity {
         btn_wa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String phoneNo = txt_telp.getText().toString().trim();
+                Uri webpage = Uri.parse("https://api.whatsapp.com/send?phone=62"+phoneNo);
+                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(intent);
+//                if (intent.resolveActivity(Detailkos_activity.this.getPackageManager()) != null) {
+//                    startActivity(intent);
+//                }
             }
         });
 

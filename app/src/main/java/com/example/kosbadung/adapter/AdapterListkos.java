@@ -43,6 +43,7 @@ public class AdapterListkos extends RecyclerView.Adapter<AdapterListkos.HolderDa
         String img= ServerAPI.URL_IMAGEKOS + mk.getFoto1();
         holder.id_kos.setText(mk.getId());
         holder.tv_namakos.setText(mk.getNamakos());
+        holder.tv_telp.setText(mk.getNo_telp());
         holder.tv_kecamatan.setText(mk.getKecamatan());
         Glide.with(context).load(img).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.fotokos);
     }
@@ -58,18 +59,20 @@ public class AdapterListkos extends RecyclerView.Adapter<AdapterListkos.HolderDa
     class HolderData extends RecyclerView.ViewHolder {
 
         ImageView fotokos;
-        TextView tv_namakos, tv_kecamatan, id_kos;
+        TextView tv_namakos, tv_kecamatan, id_kos, tv_telp;
 
         public HolderData(final View view) {
             super(view);
             tv_namakos = view.findViewById(R.id.tv_namakos);
             tv_kecamatan = view.findViewById(R.id.tv_kecamatan);
             id_kos = view.findViewById(R.id.id_kos);
+            tv_telp = view.findViewById(R.id.tv_telp);
             fotokos = view.findViewById(R.id.fotokos);
 
             view.setOnClickListener(v -> {
                 Intent intent = new Intent(view.getContext(), Detailkos_activity.class);
                 intent.putExtra("id",id_kos.getText().toString());
+                intent.putExtra("no_telp",tv_telp.getText().toString());
                 view.getContext().startActivity(intent);
             });
         }

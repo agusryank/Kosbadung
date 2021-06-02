@@ -149,7 +149,9 @@ public class ListActivity extends AppCompatActivity {
                                 Modelkos mk = new Modelkos();
                                 mk.setId(data.getString("id"));
                                 mk.setNamakos(data.getString("Namakos"));
+                                mk.setId_pemilik(data.getString("id_pemilik"));
                                 mk.setNamapemilik(data.getString("Namapemilik"));
+                                mk.setNo_telp(data.getString("No_telp"));
                                 mk.setLatitude(data.getString("Latitude"));
                                 mk.setLongtitude(data.getString("Longtitude"));
                                 mk.setFoto1(data.getString("foto1"));
@@ -159,7 +161,7 @@ public class ListActivity extends AppCompatActivity {
                                 mk.setDeskripsi(data.getString("Deskripsi"));
                                 mk.setKecamatan(data.getString("Kecamatan"));
                                 mk.setStatus(data.getString("Status"));
-                                mk.setStatus(data.getString("Aktif"));
+                                mk.setAktif(data.getString("Aktif"));
                                 mItems.add(mk);
 
                             } catch (JSONException e) {

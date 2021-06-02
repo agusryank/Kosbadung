@@ -1,14 +1,16 @@
 package com.example.kosbadung.model;
 
 public class Modelkos {
-    String  id,Namakos,Namapemilik,Latitude,Longtitude,foto1,foto2,foto3,foto4,Deskripsi,Kecamatan,Status,Aktif;
+    String  id,Namakos,id_pemilik,Namapemilik,No_telp,Latitude,Longtitude,foto1,foto2,foto3,foto4,Deskripsi,Kecamatan,Status,Aktif;
 
     public Modelkos(){}
 
-    public Modelkos(String id, String namakos, String namapemilik, String latitude, String longtitude, String foto1, String foto2, String foto3, String foto4, String deskripsi, String kecamatan, String status, String aktif) {
+    public Modelkos(String id, String namakos, String id_pemilik, String namapemilik, String no_telp, String latitude, String longtitude, String foto1, String foto2, String foto3, String foto4, String deskripsi, String kecamatan, String status, String aktif) {
         this.id = id;
         Namakos = namakos;
+        this.id_pemilik = id_pemilik;
         Namapemilik = namapemilik;
+        No_telp = no_telp;
         Latitude = latitude;
         Longtitude = longtitude;
         this.foto1 = foto1;
@@ -37,12 +39,28 @@ public class Modelkos {
         Namakos = namakos;
     }
 
+    public String getId_pemilik() {
+        return id_pemilik;
+    }
+
+    public void setId_pemilik(String id_pemilik) {
+        this.id_pemilik = id_pemilik;
+    }
+
     public String getNamapemilik() {
         return Namapemilik;
     }
 
     public void setNamapemilik(String namapemilik) {
         Namapemilik = namapemilik;
+    }
+
+    public String getNo_telp() {
+        return No_telp;
+    }
+
+    public void setNo_telp(String no_telp) {
+        No_telp = no_telp;
     }
 
     public String getLatitude() {
