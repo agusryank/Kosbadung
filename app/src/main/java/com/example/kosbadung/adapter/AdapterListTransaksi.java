@@ -52,6 +52,7 @@ public class AdapterListTransaksi extends RecyclerView.Adapter<AdapterListTransa
             holder.total_harga.setText(mk.getTotalharga());
             holder.tgl_kos.setText(mk.getTglmulai());
             holder.jumlah_kamar.setText(mk.getJumlahkamar());
+            holder.nama_kamar.setText(mk.getNamakamar());
 
         }
 
@@ -65,7 +66,7 @@ public class AdapterListTransaksi extends RecyclerView.Adapter<AdapterListTransa
 
         class HolderData extends RecyclerView.ViewHolder {
 
-            TextView id_transaksi, nama_penyewa, nama_kos, pemilik_kos, lama_kos, total_harga,tgl_kos, jumlah_kamar;
+            TextView id_transaksi, nama_penyewa, nama_kos,nama_kamar, pemilik_kos, lama_kos, total_harga,tgl_kos, jumlah_kamar;
 
             public HolderData(final View view) {
                 super(view);
@@ -77,6 +78,7 @@ public class AdapterListTransaksi extends RecyclerView.Adapter<AdapterListTransa
                total_harga = view.findViewById(R.id.total_harga);
                tgl_kos = view.findViewById(R.id.tgl_kos);
                jumlah_kamar = view.findViewById(R.id.jumlah_kamar);
+               nama_kamar = view.findViewById(R.id.nama_kamar);
 
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -85,6 +87,7 @@ public class AdapterListTransaksi extends RecyclerView.Adapter<AdapterListTransa
                         intent.putExtra("id",id_transaksi.getText().toString());
                         intent.putExtra("hargakos",total_harga.getText().toString());
                         intent.putExtra("namakos",nama_kos.getText().toString());
+                        intent.putExtra("namakamar",nama_kamar.getText().toString());
                         intent.putExtra("namapemilik",pemilik_kos.getText().toString());
                         intent.putExtra("namapenyewa",nama_penyewa.getText().toString());
                         intent.putExtra("jumlahkamar",jumlah_kamar.getText().toString());

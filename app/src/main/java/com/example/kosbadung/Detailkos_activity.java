@@ -91,9 +91,6 @@ public class Detailkos_activity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(Detailkos_activity.this, ListKamar.class);
                         intent.putExtra("id",txt_idkos.getText().toString());
-//                        intent.putExtra("namakos",txt_namakos.getText().toString());
-//                        intent.putExtra("namapemilik",txt_namapemilik.getText().toString());
-//                        intent.putExtra("harga",txt_harga.getText().toString());
                         startActivity(intent);
 
             }
@@ -135,6 +132,7 @@ public class Detailkos_activity extends AppCompatActivity {
                             txt_namakec.setText(data.getString("Kecamatan"));
                             txt_namapemilik.setText(data.getString("Namapemilik"));
                             txt_deskripsi.setText(data.getString("Deskripsi"));
+                            txt_telp.setText(data.getString("No_telp"));
                             latitude.setText(data.getString("Latitude"));
                             longtitude.setText(data.getString("Longtitude"));
 

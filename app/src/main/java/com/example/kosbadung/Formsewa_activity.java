@@ -25,10 +25,10 @@ public class Formsewa_activity extends AppCompatActivity {
 
     private Spinner sp_lamakos;
     private String[] list = {"1","2","3","4","5","6","7","8","9","10","11","12"};
-    String id,namakamar,id_kos,namakos,id_pemilik,namapemilik,harga,id_penyewa,namapenyewa,hasil;
+    String id,namakamar,id_kos,namakos,id_pemilik,namapemilik,harga,id_penyewa,namapenyewa,hasil,jmlkamar;
     Calendar cl;
     DatePickerDialog dpl;
-    TextView value_hasil,txt_calendar,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,tv_bulan,tv_hasil,txt_namakamar,txt_idkos,txt_idpemilik,txt_idpenyewa;
+    TextView max,value_hasil,txt_calendar,txt_id,txt_namakos,txt_namapemilik,txt_harga,txt_namapenyewa,tv_bulan,tv_hasil,txt_namakamar,txt_idkos,txt_idpemilik,txt_idpenyewa;
     ImageView img_calendar;
     SessionManager sessionManager;
     EditText edt_jumlahkamar;
@@ -55,6 +55,7 @@ public class Formsewa_activity extends AppCompatActivity {
         txt_idkos = findViewById(R.id.txt_idkos);
         txt_idpemilik = findViewById(R.id.txt_idpemilik);
         txt_idpenyewa = findViewById(R.id.txt_idpenyewa);
+        max = findViewById(R.id.max);
 
         sessionManager = new SessionManager(Formsewa_activity.this);
         HashMap<String, String> user = sessionManager.getUserDetail();
@@ -104,8 +105,14 @@ public class Formsewa_activity extends AppCompatActivity {
         namapemilik = getIntent().getStringExtra("nama_pemilik");
         txt_namapemilik.setText(namapemilik);
 
+        jmlkamar = getIntent().getStringExtra("jumlahkamar");
+        max.setText(jmlkamar);
+
         harga = getIntent().getStringExtra("hargakamar");
         txt_harga.setText(harga);
+
+        edt_jumlahkamar.setHint("Masukkan Jumlah Kamar (max "+jmlkamar+" kamar)");
+        edt_jumlahkamar.setTextSize(14);
 
         edt_jumlahkamar.getText().toString().trim();
 

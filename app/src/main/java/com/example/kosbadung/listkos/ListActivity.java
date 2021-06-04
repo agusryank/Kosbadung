@@ -134,7 +134,6 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void tampilkos(){
-
         StringRequest selectkos = new StringRequest(Request.Method.POST, ServerAPI.URL_read_listkos,
                 new Response.Listener<String>() {
                     @Override

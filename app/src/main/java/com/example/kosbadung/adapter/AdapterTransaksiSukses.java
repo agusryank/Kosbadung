@@ -40,6 +40,7 @@ public class AdapterTransaksiSukses extends RecyclerView.Adapter<AdapterTransaks
         Modeltransaksi mk = mItems.get(position);
 
         holder.id_transaksi.setText(mk.getId());
+        holder.id_kos.setText(mk.getId_kos());
         holder.nama_penyewa.setText(mk.getNamauser());
         holder.nama_kos.setText(mk.getNamakos());
         holder.pemilik_kos.setText(mk.getNamapemilik());
@@ -48,6 +49,8 @@ public class AdapterTransaksiSukses extends RecyclerView.Adapter<AdapterTransaks
         holder.tgl_kos.setText(mk.getTglmulai());
         holder.jumlah_kamar.setText(mk.getJumlahkamar());
         holder.tv_image.setText(mk.getBuktipembayaran());
+        holder.nama_kamar.setText(mk.getNamakamar());
+        holder.tgl_transaksi.setText(mk.getTgl_transaksi());
 
     }
 
@@ -61,11 +64,12 @@ public class AdapterTransaksiSukses extends RecyclerView.Adapter<AdapterTransaks
 
     class HolderData extends RecyclerView.ViewHolder {
 
-        TextView id_transaksi, nama_penyewa, nama_kos, pemilik_kos, lama_kos, total_harga, tgl_kos, jumlah_kamar, tv_image;
+        TextView id_kos,id_transaksi, nama_penyewa, nama_kos, pemilik_kos, lama_kos, total_harga, tgl_kos, jumlah_kamar, tv_image, nama_kamar,tgl_transaksi;
 
         public HolderData(final View view) {
             super(view);
             id_transaksi = view.findViewById(R.id.id_transaksi);
+            id_kos = view.findViewById(R.id.id_kos);
             nama_penyewa = view.findViewById(R.id.nama_penyewa);
             nama_kos = view.findViewById(R.id.nama_kos);
             pemilik_kos = view.findViewById(R.id.pemilik_kos);
@@ -74,20 +78,25 @@ public class AdapterTransaksiSukses extends RecyclerView.Adapter<AdapterTransaks
             tgl_kos = view.findViewById(R.id.tgl_kos);
             jumlah_kamar = view.findViewById(R.id.jumlah_kamar);
             tv_image = view.findViewById(R.id.tv_image);
+            nama_kamar = view.findViewById(R.id.nama_kamar);
+            tgl_transaksi = view.findViewById(R.id.tgl_transaksi);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(view.getContext(), Notatransaksi_activity.class);
                     intent.putExtra("id", id_transaksi.getText().toString());
+                    intent.putExtra("id_kos", id_kos.getText().toString());
                     intent.putExtra("hargakos", total_harga.getText().toString());
                     intent.putExtra("namakos", nama_kos.getText().toString());
+                    intent.putExtra("namakamar", nama_kamar.getText().toString());
                     intent.putExtra("namapemilik", pemilik_kos.getText().toString());
                     intent.putExtra("namapenyewa", nama_penyewa.getText().toString());
                     intent.putExtra("jumlahkamar", jumlah_kamar.getText().toString());
                     intent.putExtra("tgl_kos", tgl_kos.getText().toString());
                     intent.putExtra("lamasewa", lama_kos.getText().toString());
                     intent.putExtra("bukti", tv_image.getText().toString());
+                    intent.putExtra("transaksi", tgl_transaksi.getText().toString());
                     view.getContext().startActivity(intent);
                 }
             });

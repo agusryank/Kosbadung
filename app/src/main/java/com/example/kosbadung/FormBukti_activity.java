@@ -30,6 +30,7 @@ import com.example.kosbadung.dialog.CameraActivity;
 import com.example.kosbadung.dialog.GaleryActivity;
 import com.example.kosbadung.server.AppController;
 import com.example.kosbadung.server.ServerAPI;
+import com.example.kosbadung.session.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,10 +43,11 @@ import java.util.Map;
 public class FormBukti_activity extends AppCompatActivity {
 
     String id,id_kos,id_pemilik,id_penyewa,namakos,namapemilik,namapenyewa,namakamar,jumlahkamar,hargakos,tgl_kos,lamasewa;
-    TextView txt_jumlahkamar,txt_harga;
+    TextView txt_jumlahkamar,txt_harga,txt_namakos,txt_namakamar;
+    SessionManager sessionManager;
     TextView imagename;
     ImageView imageView;
-    Button buttoncamera,buttongaleri,simpan;
+    Button buttoncamera,buttongaleri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +55,17 @@ public class FormBukti_activity extends AppCompatActivity {
         setContentView(R.layout.activity_form_bukti);
         txt_harga = findViewById(R.id.txt_harga);
         txt_jumlahkamar = findViewById(R.id.txt_jumlahkamar);
+        txt_namakos = findViewById(R.id.txt_namakos);
+        txt_namakamar = findViewById(R.id.txt_namakamar);
         imagename = findViewById(R.id.imagename);
         imageView = findViewById(R.id.imageview);
         buttoncamera = findViewById(R.id.buttoncamera);
         buttongaleri = findViewById(R.id.buttongalery);
-        simpan = findViewById(R.id.simpan);
+
+        sessionManager = new SessionManager(FormBukti_activity.this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        id_penyewa = user.get(SessionManager.ID_USER);
+        namapenyewa = user.get(SessionManager.NAMA_USER);
 
         jumlahkamar = getIntent().getStringExtra("jumlahkamar");
         txt_jumlahkamar.setText(jumlahkamar);
@@ -66,11 +74,11 @@ public class FormBukti_activity extends AppCompatActivity {
         id = getIntent().getStringExtra("id");
         id_kos = getIntent().getStringExtra("id_kos");
         id_pemilik = getIntent().getStringExtra("id_pemilik");
-        id_penyewa = getIntent().getStringExtra("id_penyewa");
         namakamar = getIntent().getStringExtra("namakamar");
+        txt_namakamar.setText(namakamar);
         namakos = getIntent().getStringExtra("namakos");
+        txt_namakos.setText(namakos);
         namapemilik = getIntent().getStringExtra("namapemilik");
-        namapenyewa = getIntent().getStringExtra("namapenyewa");
         tgl_kos = getIntent().getStringExtra("tgl_kos");
         lamasewa = getIntent().getStringExtra("lamasewa");
 

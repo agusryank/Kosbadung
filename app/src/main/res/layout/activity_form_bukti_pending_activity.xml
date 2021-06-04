@@ -1,176 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".FormBuktiPending_activity">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/bg_header"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Upload Pembayaran"
+            android:textSize="22sp"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="30dp"
+            app:layout_constraintTop_toBottomOf="@id/bg_header"
+            android:background="@drawable/formlinegrey">
 
             <TextView
-                android:id="@+id/tv_kos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Pembayaran"
-                android:textSize="35dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:text="Nama Kos :"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/txt_namakos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/formabu"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="10dp"
+                android:text="memuat..."
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Kamar Kos :"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/txt_namakamar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/formabu"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="10dp"
+                android:text="memuat..."
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumlah Kamar yang disewa :"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/txt_jumlahkamar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/formabu"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="10dp"
+                android:text="memuat..."
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harga Total :"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/txt_harga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/formabu"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="10dp"
+                android:text="memuat..."
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Bukti Pembayaran Anda :"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/buttoncamera"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Id Transaksi : "
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"/>
-                <TextView
-                    android:id="@+id/txt_id"
-                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:text="Pilih Dari Kamera"
+                    />
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/buttongalery"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Id Transaksi"
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:text="Pilih Dari Galeri"
+                    />
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total Harga : "
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"/>
-                <TextView
-                    android:id="@+id/txt_harga"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="xxx"
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10dp"/>
-            </LinearLayout>
+                android:text="Keterangan :"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Silahkan melakukan pembayaran ke nomor rek : xxxxxx a/n xxxxx dalam waktu 24 jam. Jika tidak pesanan akan didelete oleh admin.   "
-                    android:textSize="20dp"
-                    android:padding="10dp"
-                    android:background="@drawable/formwhite"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
-            </LinearLayout>
+                android:background="@drawable/formabu"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="10dp"
+                android:text="Silahkan melakukan pembayaran ke nomor rek yang dibawah ini : BRI 464101015558533 a/n I GD AGUS RYAN KURNIANTARA, BCA 7720933394 a/n I GD AGUS RYAN KURNIANTARA, Dalam waktu 30 menit, jika tidak pesanan akan didelete oleh admin."
+                android:textColor="@color/colorBlack"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Upload Bukti Pembayaran Anda : "
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"/>
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/imageview"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_launcher_background"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"/>
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/imagename"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Status Upload..."
-                    android:textSize="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"/>
+                android:background="@drawable/formabu"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="10dp"
+                android:text="Setelah selesai membayar, harap lihat menu riwayat pembayaran anda secara berkala, untuk mengecek pembayaran yang telah sukes diverivikasi."
+                android:textColor="@color/colorBlack"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/buttoncamera"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Pilih Dari Kamera"
-                        />
-
-                    <Button
-
-                        android:id="@+id/buttongalery"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Pilih Dari Galeri"
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Setelah selesai membayar, harap lihat menu Riwayat Pembayaran secara berkala, untuk mengecek pembayaran yang telah sukes diverivikasi. "
-                    android:textSize="20dp"
-                    android:padding="10dp"
-                    android:background="@drawable/formwhite"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
-            </LinearLayout>
-
-            <Button
+            <ImageView
                 android:visibility="gone"
-                android:id="@+id/simpan"
+                android:id="@+id/imageview"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_launcher_background"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"/>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/imagename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="Bayar Sekarang"
-                android:padding="10dp"
-                android:textColor="#ffff"
-                android:background="#1d75dd"
-                />
+                android:text="Status Upload..."
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"/>
+            <TextView
+                android:id="@+id/txt_id"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Id Transaksi"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"/>
 
         </LinearLayout>
-    </ScrollView>
 
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
