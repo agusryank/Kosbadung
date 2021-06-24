@@ -19,6 +19,7 @@ public class ServerAPI {
     public static  final String URL_transaksi_pending = "https://"+URL+"/androidAPI/transaksi_pending.php";
     public static  final String URL_register = "https://"+URL+"/androidAPI/register.php";
     public static  final String URL_edit_profile = "https://"+URL+"/androidAPI/editprofile.php";
+    public static  final String URL_delete_transaksi = "https://"+URL+"/androidAPI/deletetransaksi.php";
 
     // Image
     public static  final String URL_IMAGEKOS = "https://"+URL+"/androidAPI/Image/FotoKos/";
