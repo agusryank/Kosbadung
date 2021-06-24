@@ -106,6 +106,7 @@ public class Detailkos_activity extends AppCompatActivity {
 //                if (intent.resolveActivity(Detailkos_activity.this.getPackageManager()) != null) {
 //                    startActivity(intent);
 //                }
+//Alert Comment
             }
         });
 
